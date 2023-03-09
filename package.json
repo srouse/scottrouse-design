@@ -1,0 +1,17 @@
+{
+  "name": "quantifiedproject-com",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:srouse/quantifiedproject-com.git",
+  "author": "Scott Rouse <scott.rouse@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "yarn build:readme",
+    "build:readme": "ctfl-readme build",
+    "server": "http-server ./dist"
+  },
+  "devDependencies": {
+    "contentful-readme-generator": "0.0.11",
+    "http-server": "^14.1.1"
+  }
+}
