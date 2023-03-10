@@ -19,15 +19,13 @@
 ---
 
 
-__Title__: Scott Rouse Examples
-
 ## Resume
 
-[Scott Rouse Resume 2023-03](https://assets.ctfassets.net/rtkhko6y3s3u/3TRFnxPz7ms3r8Ixnnpi0C/af37238bf57ba6a21ef47b5b81b43cee/ScottRouse-2023-03.pdf)
+[Scott Rouse Resume 2023-03](https://assets.ctfassets.net/rtkhko6y3s3u/3TRFnxPz7ms3r8Ixnnpi0C/ce2b644176aa057b7d176899eb54c645/Scott_Rouse-2023-03-10.pdf)
 
 
 ## Third Space
-Third Space was a start-up focused on creating communication and mentoring opportunities for employees within businesses. I helped research and visualize the core ideas driving the application and business model and then design out a first iteration.
+Third Space was a start-up focused on creating communication and mentoring opportunities for employees within businesses. I conducted research that I used to inform visualizations of the core ideas driving the application and business model, then designed the first iteration of the application.
 
 [Third Space Visualizations](https://assets.ctfassets.net/rtkhko6y3s3u/5Ikc3nn6ALZMAzrXoFn8t3/4a63547b4fd3dd4dbbf4598a2c76e871/3S-UX-v00_00_01.pdf)
 
@@ -42,36 +40,42 @@ Aha Notes, a notebook and note taking app, was a personal project that I built w
 
 
 ## American Family Insurance Jutro Customization
-American Family, a fortune 300 company, was migrating to a single, centralized insurance API across multiple brands without also systematizing the UI. Utilizing and manipulating their own graphics, I was able to illustrate to upper management the risks of not thinking about the UI as seriously as they did the backend.
+American Family Insurance, a Fortune 300 company, was migrating to a single, centralized insurance API across multiple brands without also systematizing the UI. Utilizing and manipulating their own graphics, I demonstrated to upper management the need to take UI as seriously as backend development.  AmFam subsequently adopted a design system that mitigated this risk.
 
 [AmFam E1P Jutro Customization](https://assets.ctfassets.net/rtkhko6y3s3u/13bn1LpXJfE4IVCzXIMvv0/47aeb86c242caa430c66cfc979a7dd4e/e1p-JutroCustomization--v00-08.pdf)
 
 
 ## Summit Next Generation UX
-This was done during my time in Summit's Design and Innovation Team. It was an exploration of what our various UI form factors could look like if we designed into the major use cases. It includes a (speculative) usage map informing mobile, desktop, and in-branch experiences.
+As an original member of Summit's newly implemented Design and Innovation Team, I initiated an exploration of what our various UI form factors could look like if we designed for our major use cases. This included a speculative usage map informing mobile, desktop, and in-branch experiences.
 
 [Summit Universal UX 2019-03](https://assets.ctfassets.net/rtkhko6y3s3u/1crcQdf3htA7XlGf6oEwx7/9c309acca8c09e8a220fffe1c5f70f67/2019-03-00-SCU-UUX.pdf)
 
 
 ## Summit Loan Member Visualization
-A Summit Design and Innovation project, LOUI (Loan Object UI) was an attempt to standardize the expression of a loan within Summit in an effort to visualize that loan across various contexts of the member's experience. This particular visualization was designed to augment an in-person conversation between a Loan Officer and a member.
+LOUI (Loan Object UI), a Summit Design and Innovation Team project that I lead, was intended to standardize the expression of a loan within Summit to visualize that loan across various contexts of the member's experience. This particular visualization was designed to augment an in-person conversation between a Loan Officer and a member.  
 
 [Summit LOUI 2019-03](https://assets.ctfassets.net/rtkhko6y3s3u/dLy1F3ewhq2P9ckeAuAon/4790fa74b9beb564559f61a4c5e2c5ef/2019-03-26-Summit-LOUI.pdf)
 
 
 ## Summit Design System
+I initiated, created, and maintain the Summit design system. It is built using Figma as the source of truth for tokens and Lit Elements. The design system is now used credit union wide and has greatly improved design quality and implementation efficiency.
+
 [Summit Design System](/scu-components/dist/scu/reference/)
 
 ## Figma Design System Widget
+The Figma Design System widget is a next generation Figma widget taking design system tokenization and distribution to the next level. It allows for easy creation of all the various types of tokens, implicit documentation, ADA feedback, Font Awesome integration, and GitHub deployment (repo and npm packaging). It is going to be published in Q2 2023.
+
 [Figma Design System Widget](https://figmadesignsystem.app/)
 
 ## Summit Content Platform
-Summit managed their website with Drupal 7 which was nearing end of life in a year or so. I was asked to research alternatives and presented a content platform, Contentful, as a solution to break out of the silo of CMS managed websites. Summit signed on and now is rebuilding their website as well as centralizing rates, branch locations, and all product information in Contentful. That information is now accessible from any and all parts of Summit's offerings. The Contentful contact described it as one of the most impressive presentations he had seen.
+I took the lead to research alternatives to the CMS Summit uses to manage their website, which is reaching end of life this year.  I presented a content platform, Contentful, as an innovative solution to break out of the silo of CMS-based websites. Summit's CMO, CIO, and enthusiastically agreed to the solution I proposed I am now leading the website rebuild, including centralizing rates, branch locations, and all product information in Contentful so that it is accessible from all of Summit's digital service offerings. A  Contentful representative described the solution I have engineered as one of the most impressive presentations he had seen.
 
 [Summit Content Platform Presentation](https://assets.ctfassets.net/rtkhko6y3s3u/6zzka6j6V8U6bgnuQ0aTo7/a1dfb43325c67c9e22379fa688e64196/scu-content-platform-2022-06-20.pdf)
 
 
 ## Summit Rates Central
+Summit Rates Central is a Contentful application that centralizes all rates and rate products. It transformed a 3 day process into less than an hour and sets the stage for complete automation of rate updates.
+
 [Rates Central](https://ratescentral.summitcreditunion.com)
 
 ## Build Information
@@ -80,7 +84,7 @@ Summit managed their website with Drupal 7 which was nearing end of life in a ye
 
 *__updated__: 3/10/2023, 8:28:16 AM*
 
-*__built__: 3/10/2023, 8:33:49 AM*
+*__built__: 3/10/2023, 5:20:07 PM*
 
 *__space__: rtkhko6y3s3u*
 
