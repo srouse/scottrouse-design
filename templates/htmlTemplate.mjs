@@ -10,7 +10,7 @@ export default function renderHTML(content, css) {
     <link rel="stylesheet" href="https://readme-design-system.netlify.app/transformations/fds-web/rds.css?${cacheBreak}" />
     <script src="https://readme-design-system.netlify.app/transformations/fds-web/icons/presentation-deck-widget-web-comp.js?${cacheBreak}"></script>
     <style>
-      ${css}
+      ${css} 
     </style>
     <link rel="stylesheet" href="./assets/styles.css?${cacheBreak}" />
   </head>
