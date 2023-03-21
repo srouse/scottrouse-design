@@ -74,7 +74,7 @@ I took the lead to research alternatives to the CMS Summit uses to manage their
 
 
 ## Summit Rates Central
-Summit Rates Central is a Contentful application that centralizes all rates and rate products. It transformed a 3 day process into less than an hour and sets the stage for complete automation of rate updates.
+Summit Rates Central is a Contentful application that centralizes all rates and rate products. It transformed a 3 day process into less than an hour and sets the stage for complete automation of rate updates. It is built using Contentful, web components (Lit Elements), and React.
 
 [Rates Central](https://ratescentral.summitcreditunion.com)
 
@@ -84,7 +84,7 @@ Summit Rates Central is a Contentful application that centralizes all rates and 
 
 *__updated__: 3/10/2023, 8:28:16 AM*
 
-*__built__: 3/10/2023, 5:20:07 PM*
+*__built__: 3/21/2023, 7:32:07 AM*
 
 *__space__: rtkhko6y3s3u*
 
