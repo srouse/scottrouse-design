@@ -5,16 +5,24 @@
   "repository": "git@github.com:srouse/quantifiedproject-com.git",
   "author": "Scott Rouse <scott.rouse@gmail.com>",
   "license": "MIT",
+  "type": "module",
   "scripts": {
-    "build": "yarn copy && yarn build:readme",
-    "build:readme": "ctfl-readme build",
+    "build": "yarn build:types && yarn build:ssg && yarn build:readme",
+    "build:readme": "yarn copy && ctfl-readme build",
+    "build:types": "scu-ssg types --output ./src/@types/generated/contentful.d.ts",
+    "build:ssg": "scu-ssg build",
     "copy": "node ./scripts/copy.mjs",
     "server": "http-server ./dist"
+  },
+  "dependencies": {
+    "@contentful/rich-text-html-renderer": "^16.1.0",
+    "@contentful/rich-text-types": "^16.2.0",
+    "@srouse/-scottrouse-design-system": "v0.0.2",
+    "scu-ssg": "0.1.18"
   },
   "devDependencies": {
     "contentful-readme-generator": "0.0.13",
     "http-server": "^14.1.1",
-    "recursive-copy": "^2.0.14",
-    "scu-components": "^0.13.25"
+    "recursive-copy": "^2.0.14"
   }
 }
