@@ -31,7 +31,7 @@ export default class HeaderView extends BaseView {
           const target = link.fields.target ? link.fields.target : '_self';
 
           const isSameUrl = // TODO: maybe highlight anchors? maybe fix?
-            ( pageUrl && url && pageUrl.fields.slug === url.fields.slug ) &&
+            ( pageUrl?.fields.slug === url?.fields.slug ) &&
             ( !link.fields.anchor );
 
           return html`
