@@ -110,7 +110,7 @@ export default class CardView extends BaseView {
         contentHtml = html`
           <div ${style({
               paddingWidth: 'spacing-2',
-              font: 'type-text-60',
+              font: 'type-text-50',
               marginBottom: 'spacing-2',
             })}>
             ${documentToHtmlString(content.fields.content, options)}
