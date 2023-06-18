@@ -94,13 +94,7 @@ export default function Checkbox(
         ...externalSFRStyles
       }, {
         ...externalStyles
-      })}
-      onClick="(evt) => {
-        return false;
-      }"
-      onKeyDown="(evt) => {
-        return false;
-      }">
+      })}>
       <input
         type="checkbox"
         class="form-checkbox-input"

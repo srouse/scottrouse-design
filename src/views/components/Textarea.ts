@@ -25,6 +25,7 @@ export default function Textarea(
       </style>
       <textarea
         class="sfr-form-textarea"
+        name="${name}"
         ${style({
             font: 'type-text-60',
             color: 'color-grey-00',
