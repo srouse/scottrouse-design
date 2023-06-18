@@ -967,10 +967,10 @@
   resolved "https://registry.yarnpkg.com/@socket.io/component-emitter/-/component-emitter-3.1.0.tgz#96116f2a912e0c02817345b3c10751069920d553"
   integrity sha512-+9jVqKhRSpsc591z5vX+X5Yyw+he/HCB4iQ/RYxw35CEPaY1gnsNE43nf9n9AaYjAQrTiI/mOwKUKdUs9vf7Xg==
 
-"@srouse/-scottrouse-design-system@v0.0.6":
-  version "0.0.6"
-  resolved "https://npm.pkg.github.com/download/@srouse/-scottrouse-design-system/0.0.6/56664dfa4ef17c23cd892ee104bdbeac18f4090c#56664dfa4ef17c23cd892ee104bdbeac18f4090c"
-  integrity sha512-B8iY5UnH3V64y35pxBgMKkiVs8fTEMTVj6KAyBgyCk378ZDeYR70LZ43fNRN29bRYsOwsaBA/EmrWMZM+SfNUQ==
+"@srouse/-scottrouse-design-system@v0.0.8":
+  version "0.0.8"
+  resolved "https://npm.pkg.github.com/download/@srouse/-scottrouse-design-system/0.0.8/4f00d7678c2707c388c3797f77f8247b38edbbb5#4f00d7678c2707c388c3797f77f8247b38edbbb5"
+  integrity sha512-3IIBYvERSZlLvtLwHsVEdT8smz4RK3PUamtM0a4mQDLCyQfdHWo1Cy3MexNeTJULjZDAzE4UqwNMxGLzpxfQbQ==
   dependencies:
     csstype "^3.1.1"
 

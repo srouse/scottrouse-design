@@ -18,10 +18,19 @@ export default function Input(
     required, 
     html`
       <style>
+        .form-input {
+          -webkit-appearance: none;
+        }
         .form-input:focus {
           outline: none;
           box-shadow: var( --sfr-effect-focus-shadow );
           border: 1px solid var( --sfr-color-grey-100 );
+        }
+        .form-input:focus:required:invalid {
+          box-shadow: var( --sfr-effect-focus-shadow );
+        }
+        .form-input:focus:required:valid {
+          box-shadow: var( --sfr-effect-valid-shadow );
         }
       </style>
       <input

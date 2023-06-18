@@ -17,10 +17,19 @@ export default function Textarea(
     required, 
     html`
       <style>
+        .sfr-form-textarea {
+          -webkit-appearance: none;
+        }
         .sfr-form-textarea:focus {
           outline: none;
           box-shadow: var( --sfr-effect-focus-shadow );
           border: 1px solid var( --sfr-color-grey-100 );
+        }
+        .sfr-form-textarea:focus:required:invalid {
+          box-shadow: var( --sfr-effect-focus-shadow );
+        }
+        .sfr-form-textarea:focus:required:valid {
+          box-shadow: var( --sfr-effect-valid-shadow );
         }
       </style>
       <textarea

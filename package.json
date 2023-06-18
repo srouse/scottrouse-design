@@ -17,7 +17,7 @@
   "dependencies": {
     "@contentful/rich-text-html-renderer": "^16.1.0",
     "@contentful/rich-text-types": "^16.2.0",
-    "@srouse/-scottrouse-design-system": "v0.0.6",
+    "@srouse/-scottrouse-design-system": "v0.0.8",
     "scu-ssg": "0.1.18"
   },
   "devDependencies": {

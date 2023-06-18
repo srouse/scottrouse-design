@@ -13,17 +13,17 @@ export default function InputLayout(
 ) {
   return html`
     <style>
-      #form-input-${name}::placeholder {
+      .sfr-input-layout::placeholder {
         color: var( --sfr-color-grey-80 );
         font: var( --sfr-text-type-60 );
       }
     </style>
     <div
-      id="form-input-${name}"
+      class="sfr-input-layout"
       ${style({
         ...externalSFRStyles,
         stack: true,
-        marginBottom: 'spacing-1-6',
+        marginBottom: 'spacing-3',
       }, externalStyles)}>
       <label
         ${style({

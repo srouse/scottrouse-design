@@ -11,12 +11,36 @@ export async function renderContactFormView(
   formView: IFormView
 ) {
   const id = `form-${formView.sys.id}`;
+
+  const toast = `<div
+      ${style({
+          padding: 'spacing-3',
+          color: 'color-grey-100',
+          backgroundColor: 'color-primary-50'
+        },{
+        position: 'fixed',
+        bottom: 'var( --sfr-spacing-2 )',
+        borderRadius: 'var( --sfr-spacing-1 )',
+        zIndex: 100,
+        left: '50%',
+        width: 'auto',
+        transform: 'translate(-50%, 0)',
+        animationName: 'fadeIn',
+        animationDuration: '5s',
+        pointerEvents: 'none',
+        opacity: 0
+      })}>
+      Thank you, I will get back to you soon!
+    </div>`;
+
   return html`
     <script>
       const urlParams = new URLSearchParams(window.location.search);
-      console.log('urlParams', urlParams);
       const form = urlParams.get('form');
       const success = urlParams.get('success');
+      if (success === 'true') {
+        document.write('${toast.replace(/\n|\r/g, '')}');
+      }
     </script>
     <style>
       @container ${id} (width < 740px) {
@@ -28,7 +52,14 @@ export async function renderContactFormView(
           width: 100% !important;
         }
       }
+      @keyframes fadeIn {
+        0%   {opacity: 0}
+        40%  {opacity: 1}
+        80%  {opacity: 1}
+        100% {opacity: 0}
+      }
     </style>
+    
     <form
       id="${id}"
       ${style({
