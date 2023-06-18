@@ -967,10 +967,10 @@
   resolved "https://registry.yarnpkg.com/@socket.io/component-emitter/-/component-emitter-3.1.0.tgz#96116f2a912e0c02817345b3c10751069920d553"
   integrity sha512-+9jVqKhRSpsc591z5vX+X5Yyw+he/HCB4iQ/RYxw35CEPaY1gnsNE43nf9n9AaYjAQrTiI/mOwKUKdUs9vf7Xg==
 
-"@srouse/-scottrouse-design-system@v0.0.2":
-  version "0.0.2"
-  resolved "https://npm.pkg.github.com/download/@srouse/-scottrouse-design-system/0.0.2/a00fda5b218bec9da163844535f86333a518fd7c#a00fda5b218bec9da163844535f86333a518fd7c"
-  integrity sha512-rmPmNLkAmxvV87WamvMWyMEYBAkFlXjt/OvcOY0N7KF0gLFDAiyY8r2h85JTKAITVBndtsVL1+1G0Y3vrhBoJA==
+"@srouse/-scottrouse-design-system@v0.0.6":
+  version "0.0.6"
+  resolved "https://npm.pkg.github.com/download/@srouse/-scottrouse-design-system/0.0.6/56664dfa4ef17c23cd892ee104bdbeac18f4090c#56664dfa4ef17c23cd892ee104bdbeac18f4090c"
+  integrity sha512-B8iY5UnH3V64y35pxBgMKkiVs8fTEMTVj6KAyBgyCk378ZDeYR70LZ43fNRN29bRYsOwsaBA/EmrWMZM+SfNUQ==
   dependencies:
     csstype "^3.1.1"
 
@@ -2862,10 +2862,10 @@ contentful-management@^10.13.0:
     lodash.isplainobject "^4.0.6"
     type-fest "^3.0.0"
 
-contentful-readme-generator@0.0.13:
-  version "0.0.13"
-  resolved "https://registry.yarnpkg.com/contentful-readme-generator/-/contentful-readme-generator-0.0.13.tgz#3bdf973f53f176263523c79ffd50ea06429eda41"
-  integrity sha512-cPz73VC8d8dEsu0B9KeoDJ/X2Mvy+pKF8sVL8XP21xKWpdpQdGSxjiXixhDlT5haFKcCgWUk1sPxcKVu/EaF5Q==
+contentful-readme-generator@0.0.21:
+  version "0.0.21"
+  resolved "https://registry.yarnpkg.com/contentful-readme-generator/-/contentful-readme-generator-0.0.21.tgz#42ef17952460920abd2ff8ce6ab5d49523b64fbd"
+  integrity sha512-UjQxZhcwXqXnU/ZLzk1wYGELFwKU6a36ByUhn2+eu0LC2RXpXlfDA1Yw7N9yg/6tGp91SVAxi69F5X3p3wCMEA==
   dependencies:
     badges "^4.27.0"
     chalk "^5.0.1"

@@ -12,10 +12,19 @@ export default function Textarea(
   required: boolean = false,
 ) {
   return InputLayout(
-    label, name, externalSFRStyles, externalStyles,
+    label, name,
+    externalSFRStyles, externalStyles,
     required, 
     html`
+      <style>
+        .sfr-form-textarea:focus {
+          outline: none;
+          box-shadow: var( --sfr-effect-focus-shadow );
+          border: 1px solid var( --sfr-color-grey-100 );
+        }
+      </style>
       <textarea
+        class="sfr-form-textarea"
         ${style({
             font: 'type-text-60',
             color: 'color-grey-00',
@@ -24,7 +33,7 @@ export default function Textarea(
           }, {
             borderRadius: '10px',
             height: '270px'
-          })}>
-      </textarea>`
+          })}
+          ${required ? 'required' : ''}></textarea>`
   );
 }

@@ -13,17 +13,19 @@ export default function Input(
   required: boolean = false,
   placeholder: string = '',
 ) {
-
-  let pattern = '';
-  if (type === 'email') {
-    pattern = "/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/";
-  }
-
   return InputLayout(
     label, name, externalSFRStyles, externalStyles,
     required, 
     html`
+      <style>
+        .form-input:focus {
+          outline: none;
+          box-shadow: var( --sfr-effect-focus-shadow );
+          border: 1px solid var( --sfr-color-grey-100 );
+        }
+      </style>
       <input
+        class="form-input"
         ${style({
           font: 'type-text-60',
           color: 'color-grey-00',
@@ -32,8 +34,7 @@ export default function Input(
         }, {
           borderRadius: '10px',
         })}
-        type="text"
-        ${pattern ? 'pattern="${pattern}"' : ''}
+        type="${type}"
         ${required ? 'required' : ''}
         id="form-input-${name}"
         placeholder="${placeholder}"

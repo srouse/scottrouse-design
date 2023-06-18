@@ -32,12 +32,17 @@ export default async function renderSimpleHtml(
       --page-max-width: 1090px;
       --section-margin: var( --sfr-spacing-5 );
     }
-    [data-entry-type-id] {
+    /* [data-entry-type-id] {
       border: 1px solid pink;
+    } */
+    *:focus {
+      box-shadow: var( --sfr-effect-focus-shadow );
+      border-radius: 4px;
+      outline: none;
     }
   </style>
   <body ${style({
-        'font': 'type-text-50'
+        'font': 'type-text-50',
       })}>
       <div ${style({
         stack: true,

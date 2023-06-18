@@ -68,10 +68,10 @@ export default class HeaderView extends BaseView {
           }
           .header-navigation {
             flex-flow: row nowrap;
-            justify-content: space-between;
+            /* justify-content: space-between; */
           }
             .header-navigation a {
-              font: var( --sfr-type-text-50 );
+              /* font: var( --sfr-type-text-70 ); */
             }
         }
         @container header (width < 300px) {
@@ -79,7 +79,7 @@ export default class HeaderView extends BaseView {
             flex-flow: column nowrap;
           }
             .header-navigation a {
-              font: var( --sfr-type-text-40 );
+              /* font: var( --sfr-type-text-40 ); */
               margin: 0;
               margin-bottom: var( --sfr-spacing-1 );
             }
@@ -103,8 +103,9 @@ export default class HeaderView extends BaseView {
         ${style({
           flexH: true,
           alignmentCenter: true,
+          paddingTop: 'spacing-8',
+          paddingBottom: 'spacing-4'
         }, {
-          height: '200px',
           container: 'header / inline-size',
           // position: 'sticky', top: '0',
           alignItems: 'center',// TEMP BUG FIX
@@ -120,7 +121,7 @@ export default class HeaderView extends BaseView {
             // border: 'color-grey-10'
           }, {
             maxWidth: 'var( --page-max-width )',
-            margin: 'var( --section-margin )',
+            margin: '0 var( --section-margin )',
             width: '100%',
             alignItems: 'baseline',// TEMP BUG FIX
             // alignItems: 'center',// TEMP BUG FIX

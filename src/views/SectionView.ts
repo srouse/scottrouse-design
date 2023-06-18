@@ -6,6 +6,7 @@ import { SFRColorValue } from "@srouse/-scottrouse-design-system/transformations
 import renderLayouts from "../utils/renderLayouts";
 import renderOutputHtml from "../utils/renderOutputHtml";
 import Controller from "../Controller";
+import Header from "./components/Header";
 
 export default class SectionView extends BaseView {
 
@@ -43,7 +44,6 @@ export default class SectionView extends BaseView {
     const children = await renderLayouts(controller, section.fields.views);
     localController.renderState.inverse = origInverse;
 
-
     let textColor: SFRColorValue = 'color-grey-00';
     if (inverse === true) {
       textColor = 'color-grey-100'
@@ -55,6 +55,11 @@ export default class SectionView extends BaseView {
     }
 
     return renderOutputHtml(html`
+      <style>
+        [data-entry-id="${section.sys.id}"] .section-body > * {
+          margin-bottom: var( --sfr-spacing-2 );
+        }
+      </style>
       <div
         data-entry-type-id="${section.sys.contentType.sys.id}"
         data-entry-id="${section.sys.id}"
@@ -68,25 +73,26 @@ export default class SectionView extends BaseView {
           paddingLeft: 'var( --section-margin )',
           paddingRight: 'var( --section-margin )',
         })}>
-        <div ${style({
+        <div
+          class="section-body"
+          ${style({
             stack: true,
           }, {
             maxWidth,
             margin: '0 auto',
           })}>
           ${section.fields.title ? html`
-            <h2 ${style({
-                font: 'type-text-bold-70',
-                marginBottom: 'spacing-2',
+            ${Header(
+              section.fields.title, 2,
+              {
                 color: textColor,
-              },{
-                marginTop: 0, marginLeft: 0, marginRight: 0,
-                padding: 0,
+                font: 'type-text-bold-60',
+              },
+              {
                 textAlign: section.fields.alignment === 'center' ? 'center' :
                   section.fields.alignment === 'left' ? 'left' : 'right'
-              })}>
-              ${section.fields.title}
-            </h2>
+              }
+            )}
           `: ''}
           ${children.join('')}
         </div>

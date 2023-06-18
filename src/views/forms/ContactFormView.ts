@@ -2,10 +2,15 @@ import { html } from "scu-ssg";
 import Input from "../components/Input";
 import style from "@srouse/-scottrouse-design-system/transformations/fds-web/style";
 import Textarea from "../components/Textarea";
+import { IFormView } from "../../@types/generated/contentful";
+import Checkbox from "../components/Checkbox";
 
 
 
-export async function renderContactFormView() {
+export async function renderContactFormView(
+  formView: IFormView
+) {
+  const id = `form-${formView.sys.id}`;
   return html`
     <script>
       const urlParams = new URLSearchParams(window.location.search);
@@ -14,59 +19,99 @@ export async function renderContactFormView() {
       const success = urlParams.get('success');
     </script>
     <style>
-      form::after {
-        content: "";
-        clear: both;
-        display: table;
+      @container ${id} (width < 740px) {
+        .form-name {
+          display: block;
+        }
+        #${id} > *, .form-name > *{
+          max-width: 100% !important;
+          width: 100% !important;
+        }
       }
     </style>
     <form
-      ${style({}, {
-        display: 'block',
-        width: '100%'
+      id="${id}"
+      ${style({
+        stack: true,
+      }, {
+        width: '100%',
+        container: `${id} / inline-size`
       })}
       name="contact"
       action="/?form=contact&success=true#contact"
       netlify>
-      ${Input(
-        'First Name',
-        'first-name',
-        {
-          marginRight: 'spacing-2',
-        }, {
-          maxWidth: '340px',
-          width: '100%',
-          float: 'left',
-        },
-        'text', true
-      )}
-      ${Input(
-        'Last Name',
-        'last-name', 
-        {}, {
-          maxWidth: '340px',
-          width: '100%',
-          float: 'left',
-        }, 'text', true
-      )}
+      <div
+        class="form-name"
+        ${style({
+          flexH: true,
+        })}>
+        ${Input(
+          'First Name',
+          'first-name',
+          {
+            marginRight: 'spacing-2',
+          }, {
+            maxWidth: '340px',
+            width: '100%',
+          },
+          'text', true
+        )}
+        ${Input(
+          'Last Name',
+          'last-name', 
+          {}, {
+            maxWidth: '340px',
+            width: '100%',
+          }, 'text', true
+        )}
+      </div>
+
       ${Input(
         'E-mail Address',
         'email',
         {}, {
           maxWidth: '340px',
           width: '100%',
-          float: 'left',
-          clear: 'left'
         }, 'email', true
       )}
+
+      <div
+        ${style({
+          font: 'type-text-semibold-60',
+          marginHeight: 'spacing-2',
+        })}>
+        Let's talk about...
+      </div>
+
+      ${Checkbox(
+        'Design Systems',
+        'interest',
+        'designSystem'
+      )}
+      ${Checkbox(
+        'Figma Widgets',
+        'interest',
+        'figmaWidgets'
+      )}
+      ${Checkbox(
+        'Partnership and collaboration',
+        'interest',
+        'partnership'
+      )}
+      ${Checkbox(
+        'Other',
+        'interest',
+        'other',
+      )}
+
       ${Textarea(
         'A brief description of what you may be interested in:',
         'message',
-        {}, {
+        {
+          marginTop: 'spacing-4'
+        }, {
           maxWidth: '500px',
           width: '100%',
-          float: 'left',
-          clear: 'left'
         }, true
       )}
       
@@ -79,9 +124,8 @@ export async function renderContactFormView() {
           color: 'color-grey-100',
         }, {
           display: 'block',
-          float: 'left',
-          clear: 'left',
           border: 'none',
+          width: 'auto',
           borderRadius: 'var( --sfr-spacing-1 )'
         })}
         type="submit">

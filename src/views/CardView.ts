@@ -8,6 +8,7 @@ import renderOutputHtml from "../utils/renderOutputHtml";
 import Controller from "../Controller";
 import { SFRColorValue } from "@srouse/-scottrouse-design-system/transformations/fds-web/css-vars";
 import Button from "./components/Button";
+import Header from "./components/Header";
 
 export default class CardView extends BaseView {
 
@@ -25,7 +26,7 @@ export default class CardView extends BaseView {
     }
 
     const content = cardView.fields.content;
-    let headerHtml = '';
+    let titleHtml = '';
     let contentHtml = '';
     let imgHtml = '';
     let btnsHtml = '';
@@ -63,20 +64,35 @@ export default class CardView extends BaseView {
       }
 
       // HEADER
-      headerHtml = content.fields.title || '';
-      headerHtml = content.fields.title ? html`
-            <h2 ${style({
-                font: 'type-text-semibold-80',
-                marginBottom: 'spacing-1',
-                color: textColor,
-              },{
-                marginTop: 0, marginLeft: 0, marginRight: 0,
-                padding: 0,
-              })}>
-              ${content.fields.title}
-            </h2>
-          `: '';
-
+      if (content.fields.title) {
+        // const headerRender = (node, next, level) => {
+        //   let text = next(node.content);
+        //   text = text.replace(/\r|\n/g, '<br/>');
+        //   return Header(text, level);
+        // }
+        const options = {
+          renderNode: {
+            [BLOCKS.PARAGRAPH]: (node, next) => {
+              let text = next(node.content);
+              text = text.replace(/\r|\n/g, '<br/>');
+              return html`
+                <h3 ${style({
+                  font: 'type-text-semibold-70',
+                })}>
+                  ${text}
+              </h3>`;
+            },
+            // [BLOCKS.HEADING_1]: (node, next) => headerRender(node, next, 1),
+            // [BLOCKS.HEADING_2]: (node, next) => headerRender(node, next, 2),
+            // [BLOCKS.HEADING_3]: (node, next) => headerRender(node, next, 3),
+            // [BLOCKS.HEADING_4]: (node, next) => headerRender(node, next, 4),
+            // [BLOCKS.HEADING_5]: (node, next) => headerRender(node, next, 5),
+            // [BLOCKS.HEADING_6]: (node, next) => headerRender(node, next, 6),
+          },
+        };
+        titleHtml = documentToHtmlString(content.fields.title, options);
+      }
+          
       // CONTENT
       if (content.fields.content) {
         const options = {
@@ -134,7 +150,7 @@ export default class CardView extends BaseView {
           alignContent: 'center', // bug fix
         })}>
         ${imgHtml}
-        ${headerHtml}
+        ${titleHtml}
         ${contentHtml}
         ${btnsHtml}
       </div>`;

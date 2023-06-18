@@ -25,7 +25,7 @@ export default class FormView extends BaseView {
     let formHtml = '';
     switch( formView.fields.type ) {
       case "Contact" :
-        formHtml = await renderContactFormView();
+        formHtml = await renderContactFormView(formView);
         break;
     }
 

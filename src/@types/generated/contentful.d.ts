@@ -8,7 +8,7 @@ export interface IArticleFields {
   entryTitle: string;
 
   /** Title */
-  title?: string | undefined;
+  title?: Document | undefined;
 
   /** Type */
   type?: "internal" | "external" | undefined;
@@ -52,6 +52,22 @@ export interface ICardViewFields {
   /** Entry Title */
   entryTitle: string;
 
+  /** Button One Design */
+  buttonOneDesign?:
+    | "light"
+    | "dark"
+    | "primaryLight"
+    | "primaryDark"
+    | undefined;
+
+  /** Button Two Design */
+  buttonTwoDesign?:
+    | "light"
+    | "dark"
+    | "primaryLight"
+    | "primaryDark"
+    | undefined;
+
   /** Content */
   content?: IContent | IProject | IArticle | undefined;
 }
@@ -78,7 +94,7 @@ export interface IContentFields {
   entryTitle: string;
 
   /** Title */
-  title?: string | undefined;
+  title?: Document | undefined;
 
   /** Content */
   content?: Document | undefined;
@@ -113,8 +129,17 @@ export interface IFooterFields {
   /** Entry Title */
   entryTitle: string;
 
+  /** Located */
+  located?: Document | undefined;
+
+  /** Email */
+  email?: string | undefined;
+
+  /** LinkedIn Url */
+  linkedInUrl?: ILink | undefined;
+
   /** Content */
-  content?: Entry<{ [fieldId: string]: unknown }> | undefined;
+  content?: Document | undefined;
 
   /** Main Navigation */
   mainNavigation?: INavigation | undefined;
@@ -494,7 +519,7 @@ export interface IProjectFields {
   entryTitle: string;
 
   /** Title */
-  title: string;
+  title?: Document | undefined;
 
   /** Type */
   type?: "Figma Widget" | "Contentful App" | "Figma Plugin" | undefined;
@@ -706,6 +731,25 @@ export interface ISection extends Entry<ISectionFields> {
 export interface ISimpleViewFields {
   /** Entry Title */
   entryTitle: string;
+
+  /** Alignment */
+  alignment?: "left" | "center" | "right" | undefined;
+
+  /** Button One Design */
+  buttonOneDesign?:
+    | "light"
+    | "dark"
+    | "primaryLight"
+    | "primaryDark"
+    | undefined;
+
+  /** Button Two Design */
+  buttonTwoDesign?:
+    | "light"
+    | "dark"
+    | "primaryLight"
+    | "primaryDark"
+    | undefined;
 
   /** Content */
   content?: IContent | undefined;
