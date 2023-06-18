@@ -1,19 +1,11 @@
 import { BaseController, html, renderEntry } from "scu-ssg";
 import style from "@srouse/-scottrouse-design-system/transformations/fds-web/style";
-import { IWebsite } from "../../@types/generated/contentful";
-import WebsiteModel, { getWebsite } from "../../models/WebsiteModel";
-import { javascript } from "./javascript";
 
-export default async function renderHtml(
+export default async function renderSimpleHtml(
   controller: BaseController,
   content: string,
   cacheBreak: string = `${Math.random()}`
 ) {
-
-  // need website
-  const website : IWebsite = getWebsite(controller);
-  const headerHtml = await renderEntry(controller, website.fields.header);
-  const footerHtml = await renderEntry(controller, website.fields.footer);
 
   return html`
 <html>
@@ -29,11 +21,6 @@ export default async function renderHtml(
     gtag('js', new Date());
     gtag('config', 'G-GKPHMTEMSG');
   </script> -->
-  <script>
-    ${javascript()}
-  </script>
-  <!-- for anchor highlighting -->
-  <style id="nav-css"></style>
   <style>
     html, body {
       margin: 0; padding: 0;
@@ -46,20 +33,18 @@ export default async function renderHtml(
       --section-margin: var( --sfr-spacing-5 );
     }
     [data-entry-type-id] {
-      /* border: 1px solid pink; */
+      border: 1px solid pink;
     }
   </style>
   <body ${style({
         'font': 'type-text-50'
       })}>
-      ${headerHtml}
       <div ${style({
         stack: true,
         width: 'spacing-col-12'
       })}>
         ${content}
       </div>
-      ${footerHtml}
   </body>
 </html>`;
 }

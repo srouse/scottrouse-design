@@ -3,6 +3,7 @@ import { BaseController, BaseView, html } from "scu-ssg";
 import { IGridView, ISection } from '../@types/generated/contentful';
 import style from "@srouse/-scottrouse-design-system/transformations/fds-web/style";
 import renderLayouts from "../utils/renderLayouts";
+import renderOutputHtml from "../utils/renderOutputHtml";
 
 export default class GridView extends BaseView {
 
@@ -10,48 +11,59 @@ export default class GridView extends BaseView {
     entry: Entry<unknown> | null | undefined,
     controller: BaseController
   ): Promise<string> {
-    const grid = entry as unknown as IGridView;
-    const children = await renderLayouts(controller, grid.fields.views);
+    const gridView = entry as unknown as IGridView;
+    const children = await renderLayouts(controller, gridView.fields.views);
+    const minHorizontalWidth = gridView.fields.minWidthHorizontal || 600;
+    const containerRef = `[data-entry-id="${gridView.sys.id}"]`;
 
-    return html`
-        <style>
-          @container grid (width < 600px) {
-            .grid-body {
-              display: block;
-            }
-
-              .grid-body > * {
-                margin-right: 0;
-              }
+    const gap = 'var( --sfr-spacing-4 )';
+    const gridHtml = html`
+      <style>
+        ${containerRef} > .grid-body > *:not(:last-child) {
+          margin-right: ${gap};
+        }
+        @container (width < ${minHorizontalWidth}px) {
+          ${containerRef} > .grid-body {
+            display: block;
           }
-        </style>
+            ${containerRef} > .grid-body > *:not(:last-child) {
+              margin-right: 0;
+              margin-bottom: ${gap};
+            }
+        }
+      </style>
+      <div
+        data-entry-type-id="${gridView.sys.contentType.sys.id}"
+        data-entry-id="${gridView.sys.id}"
+        ${style({
+          width: 'spacing-col-12'
+        }, {
+          containerType: `inline-size`
+        })}>
         <div
-          data-entry-type-id="gridView"
+          class="grid-body"
           ${style({
+            flexH: true,
             width: 'spacing-col-12'
-          }, {
-            container: 'grid / inline-size'
           })}>
-          <div
-            class="grid-body"
-            ${style({
-              flexH: true,
-              width: 'spacing-col-12'
-            })}>
-            ${(children).map((child: string, index: number) => {
-              return html`
-                <div ${style({
-                    marginRight: index < children.length ? 'spacing-2' : 'spacing-0'
-                  }, {
-                    flex: '1'
-                  })}>
-                  ${child}
-                </div>
-              `;
-            }).join('')}
-          </div>
+          ${(children).map((child: string, index: number) => {
+            return html`
+              <div ${style({}, {
+                  flex: '1'
+                })}>
+                ${child}
+              </div>
+            `;
+          }).join('')}
         </div>
+      </div>
     `;
+
+    return renderOutputHtml(
+      gridHtml,
+      gridView,
+      controller
+    );
   }
 
 }

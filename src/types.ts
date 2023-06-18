@@ -11,4 +11,5 @@ export enum ContentTypeId {
   formView = 'formView',
   imageView = 'imageView',
   simpleView = 'simpleView',
+  cardView = 'cardView',
 }

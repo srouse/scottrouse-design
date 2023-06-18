@@ -3,6 +3,7 @@ import { BaseController, BaseView, html } from "scu-ssg";
 import { IFooter, IHeader, INavigation, IPage, IUrl } from '../@types/generated/contentful';
 import style from "@srouse/-scottrouse-design-system/transformations/fds-web/style";
 import { ContentTypeId } from "../types";
+import renderOutputHtml from "../utils/renderOutputHtml";
 
 export default class FooterView extends BaseView {
 
@@ -35,8 +36,8 @@ export default class FooterView extends BaseView {
                 font: 'type-text-30',
                 marginLeft: 'spacing-3',
                 color: 'color-grey-00',
-                borderBottom: 'color-grey-00',
-                marginBottom: 'spacing-1'
+                marginBottom: 'spacing-1',
+                colorHover: 'color-grey-40',
               }, {
                 textDecoration: 'none',
               })}
@@ -49,49 +50,53 @@ export default class FooterView extends BaseView {
       }).join('');
     }
 
-    return html`
-    <div
-      data-entry-type-id="footer"
-      ${style({
-        flexH: true,
-        alignmentCenter: true,
-        backgroundColor: 'color-grey-100'
-      }, {
-        height: '200px',
-        alignItems: 'center',// TEMP BUG FIX
-        justifyContent: 'center',// TEMP BUG FIX
-        position: 'sticky',
-        top: '0'
-      })}>
-      <div ${style({
+    return renderOutputHtml(html`
+      <div
+        data-entry-type-id="${footer.sys.contentType.sys.id}"
+        data-entry-id="${footer.sys.id}"
+        ${style({
           flexH: true,
-          alignmentBaselineLeft: true,
+          alignmentCenter: true,
+          backgroundColor: 'color-grey-100'
         }, {
-          maxWidth: 'var( --page-max-width )',
-          margin: 'var( --section-margin )',
-          width: '100%',
-          alignItems: 'baseline',// TEMP BUG FIX
+          height: '200px',
+          alignItems: 'center',// TEMP BUG FIX
+          justifyContent: 'center',// TEMP BUG FIX
+          position: 'sticky',
+          top: '0'
         })}>
         <div ${style({
-            font: 'type-text-semibold-100'
+            flexH: true,
+            alignmentBaselineLeft: true,
           }, {
-            flex: '1'
+            maxWidth: 'var( --page-max-width )',
+            margin: 'var( --section-margin )',
+            width: '100%',
+            alignItems: 'baseline',// TEMP BUG FIX
           })}>
-          (footer)
+          <div ${style({
+              font: 'type-text-semibold-100'
+            }, {
+              flex: '1'
+            })}>
+            (footer)
+          </div>
+          <div ${style({
+              width: 'spacing-col-3-6'
+            })}>
+            Located in Madison, Wisconsin
+          </div>
+          <div ${style({
+              flexV: true,
+              width: 'spacing-col-3-6'
+            })}>
+            ${mainNavHtml}
+          </div>
         </div>
-        <div ${style({
-            width: 'spacing-col-3-6'
-          })}>
-          Located in Madison, Wisconsin
-        </div>
-        <div ${style({
-            flexV: true,
-            width: 'spacing-col-3-6'
-          })}>
-          ${mainNavHtml}
-        </div>
-      </div>
-    </div>`;
+      </div>`,
+      footer,
+      controller
+    );
   }
 
 }

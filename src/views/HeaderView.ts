@@ -3,6 +3,7 @@ import { BaseController, BaseView, html } from "scu-ssg";
 import { IHeader, INavigation, IPage, IUrl } from '../@types/generated/contentful';
 import style from "@srouse/-scottrouse-design-system/transformations/fds-web/style";
 import { ContentTypeId } from "../types";
+import renderOutputHtml from "../utils/renderOutputHtml";
 
 export default class HeaderView extends BaseView {
 
@@ -12,7 +13,6 @@ export default class HeaderView extends BaseView {
   ): Promise<string> {
     const header = entry as unknown as IHeader;
 
-    
     const focusedEntry = controller.state.getEntry(controller.state.context.entryId);
     let pageUrl: IUrl | undefined;
     if (focusedEntry && focusedEntry.sys.contentType.sys.id === ContentTypeId.page) {
@@ -41,13 +41,15 @@ export default class HeaderView extends BaseView {
                 marginLeft: index > 0 ? 'spacing-3' : 'spacing-0',
                 color: 'color-grey-00',
                 borderBottom: 'color-grey-00',
-                paddingBottom: 'spacing-0-6'
+                paddingBottom: 'spacing-0-6',
+                colorHover: 'color-grey-40',
               }, {
                 textDecoration: 'none',
                 borderWidth: isSameUrl ? '4px' : '0',
               })}
               href="${url ? url.fields.slug : link.fields.externalUrl}${anchor}"
-              target="${target}">
+              target="${target}"
+              class="nav nav-${link.fields.anchor}">
               ${link.fields.title.toLowerCase()}
             </a>
           `;
@@ -55,81 +57,100 @@ export default class HeaderView extends BaseView {
       }).join('');
     }
 
-    return html`
-    <style>
-      @container header (width < 600px) {
-        .header-body {
-          display: block;
-        }
-        .header-fill {
-          display: none;
-        }
-        .header-navigation {
-          flex-flow: row nowrap;
-          justify-content: space-between;
-        }
-          .header-navigation a {
-            font: var( --sfr-type-text-50 );
+    return renderOutputHtml(html`
+      <style>
+        @container header (width < 600px) {
+          .header-body {
+            display: block;
           }
-      }
-      @container header (width < 300px) {
-        .header-navigation {
-          flex-flow: column nowrap;
-        }
-          .header-navigation a {
-            font: var( --sfr-type-text-40 );
-            margin: 0;
-            margin-bottom: var( --sfr-spacing-1 );
+          .header-fill {
+            display: none;
           }
-      }
-    </style>
-    <div
-      data-entry-type-id="header"
-      ${style({
-        flexH: true,
-        alignmentCenter: true,
-      }, {
-        height: '200px',
-        alignItems: 'center',// TEMP BUG FIX
-        justifyContent: 'center',// TEMP BUG FIX
-        position: 'sticky',
-        top: '0',
-        backgroundColor: 'rgba( 255, 255, 255, 0.8)',
-        container: 'header / inline-size'
-      })}>
+          .header-navigation {
+            flex-flow: row nowrap;
+            justify-content: space-between;
+          }
+            .header-navigation a {
+              font: var( --sfr-type-text-50 );
+            }
+        }
+        @container header (width < 300px) {
+          .header-navigation {
+            flex-flow: column nowrap;
+          }
+            .header-navigation a {
+              font: var( --sfr-type-text-40 );
+              margin: 0;
+              margin-bottom: var( --sfr-spacing-1 );
+            }
+        }
+      </style>
+      <script>
+        /* window.onscroll = function() {scrollFunction()};
+        function scrollFunction() {
+          const header = document.querySelector('[data-entry-id="${header.sys.id}"] .header-body');
+          console.log( document.body.scrollTop );
+          if (document.body.scrollTop < 140) {
+            header.style.height = Math.round( document.body.scrollTop ) - 200;
+          } else {
+            header.style.height = 60;
+          }
+        } */
+      </script>
       <div
-        class="header-body"
+        data-entry-type-id="header"
+        data-entry-id="${header.sys.id}"
         ${style({
           flexH: true,
-          alignmentBaselineLeft: true,
+          alignmentCenter: true,
         }, {
-          maxWidth: 'var( --page-max-width )',
-          margin: 'var( --section-margin )',
-          width: '100%',
-          alignItems: 'baseline',// TEMP BUG FIX
+          height: '200px',
+          container: 'header / inline-size',
+          // position: 'sticky', top: '0',
+          alignItems: 'center',// TEMP BUG FIX
+          justifyContent: 'center',// TEMP BUG FIX
+          zIndex: 100,
         })}>
         <div
-          class="header-title"
-          ${style({
-            font: 'type-text-semibold-100'
-          })}>
-          ${header.fields.title}
-        </div>
-        <div
-          class="header-fill"
-          ${style({}, {
-            flex: 1 
-          })}>
-        </div>
-        <div
-          class="header-navigation"
+          class="header-body"
           ${style({
             flexH: true,
+            alignmentBaselineLeft: true,
+            backgroundColor: 'color-grey-100',
+            // border: 'color-grey-10'
+          }, {
+            maxWidth: 'var( --page-max-width )',
+            margin: 'var( --section-margin )',
+            width: '100%',
+            alignItems: 'baseline',// TEMP BUG FIX
+            // alignItems: 'center',// TEMP BUG FIX
+            justifyContent: 'center',// TEMP BUG FIX
           })}>
-          ${mainNavHtml}
+          <div
+            class="header-title"
+            ${style({
+              font: 'type-text-semibold-100'
+            })}>
+            ${header.fields.title}
+          </div>
+          <div
+            class="header-fill"
+            ${style({}, {
+              flex: 1 
+            })}>
+          </div>
+          <div
+            class="header-navigation"
+            ${style({
+              flexH: true,
+            })}>
+            ${mainNavHtml}
+          </div>
         </div>
-      </div>
-    </div>`;
+      </div>`,
+      header,
+      controller
+    );
   }
 
 }

@@ -170,6 +170,9 @@ export interface IGridViewFields {
   /** Entry Title */
   entryTitle: string;
 
+  /** Min Width Horizontal */
+  minWidthHorizontal?: number | undefined;
+
   /** Views */
   views?:
     | (ISimpleView | IGridView | IImageView | IFormView | ICardView)[]
@@ -358,6 +361,9 @@ export interface IImage extends Entry<IImageFields> {
 export interface IImageViewFields {
   /** Entry Title */
   entryTitle: string;
+
+  /** Max Width */
+  maxWidth?: number | undefined;
 
   /** Image */
   image?: IImage | undefined;
@@ -658,6 +664,9 @@ export interface ISectionFields {
 
   /** Anchor */
   anchor?: string | undefined;
+
+  /** Max Width */
+  maxWidth?: number | undefined;
 
   /** Background Color */
   backgroundColor?:

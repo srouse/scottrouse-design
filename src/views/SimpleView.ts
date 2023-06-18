@@ -4,6 +4,9 @@ import { ISimpleView } from '../@types/generated/contentful';
 import style from "@srouse/-scottrouse-design-system/transformations/fds-web/style";
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import { BLOCKS } from "@contentful/rich-text-types";
+import renderOutputHtml from "../utils/renderOutputHtml";
+import Controller from "../Controller";
+import { SFRColorValue } from "@srouse/-scottrouse-design-system/transformations/fds-web/css-vars";
 
 export default class SimpleView extends BaseView {
 
@@ -35,17 +38,27 @@ export default class SimpleView extends BaseView {
       }
     }
 
-    return html`
-        <div
-          data-entry-type-id="section"
-          ${style({
-            stack: true,
-            width: 'spacing-col-12'
-          })}>
-          ${headerHtml}
-          ${contentHtml}
-        </div>
-    `;
+    // possibly inversed color
+    const localController = (controller as Controller);
+    let textColor: SFRColorValue = 'color-grey-00';
+    if (localController.renderState.inverse === true) {
+      textColor = 'color-grey-100'
+    }
+
+    const output = html`
+      <div
+        data-entry-type-id="${simpleView.sys.contentType.sys.id}"
+        data-entry-id="${simpleView.sys.id}"
+        ${style({
+          stack: true,
+          width: 'spacing-col-12',
+          color: textColor,
+        })}>
+        ${headerHtml}
+        ${contentHtml}
+      </div>`;
+
+    return renderOutputHtml( output, simpleView, controller );
   }
 
 }
