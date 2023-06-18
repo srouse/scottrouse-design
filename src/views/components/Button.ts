@@ -2,11 +2,9 @@ import { html } from "scu-ssg";
 import { ILink } from "../../@types/generated/contentful";
 import style from "@srouse/-scottrouse-design-system/transformations/fds-web/style";
 
-
 export default function Button(
   link: ILink
 ) {
-
   let href = link.fields.externalUrl;
   const url = link.fields.url;
   if (url) {
