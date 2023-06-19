@@ -134,9 +134,18 @@ export async function renderContactFormView(
         }
       )}
       ${Checkbox(
-        'Partnership and collaboration',
+        'Contentful',
         'interest',
-        'partnership',
+        'contentful',
+        {}, {
+          maxWidth: '340px',
+          width: '100%',
+        }
+      )}
+      ${Checkbox(
+        'Workshops / Mentorships',
+        'interest',
+        'workshops',
         {}, {
           maxWidth: '340px',
           width: '100%',
