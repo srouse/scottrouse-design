@@ -78,6 +78,7 @@ export default class CardView extends BaseView {
               return html`
                 <h3 ${style({
                   font: 'type-text-semibold-70',
+                  margin: 'spacing-0',
                 })}>
                   ${text}
               </h3>`;
@@ -112,6 +113,8 @@ export default class CardView extends BaseView {
               paddingWidth: 'spacing-2',
               font: 'type-text-50',
               marginBottom: 'spacing-2',
+            }, {
+              flex: 1,
             })}>
             ${documentToHtmlString(content.fields.content, options)}
           </div>`;
@@ -140,14 +143,16 @@ export default class CardView extends BaseView {
         data-entry-type-id="${cardView.sys.contentType.sys.id}"
         data-entry-id="${cardView.sys.id}"
         ${style({
-          stack: true,
+          flexV: true,
           width: 'spacing-col-12',
           color: textColor,
         }, {
-          overflow: 'hidden',
-          borderRadius: 'var( --sfr-spacing-0-6 )',
+          // overflow: 'hidden',
+          // borderRadius: 'var( --sfr-spacing-0-6 )',
           textAlign: 'center',
-          alignContent: 'center', // bug fix
+          // alignContent: 'center', // bug fix
+          justifyContent: 'center',
+          alignItems: 'center',
         })}>
         ${imgHtml}
         ${titleHtml}

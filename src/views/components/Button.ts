@@ -13,6 +13,8 @@ export default function Button(
   link: ILink,
   design: ButtonDesigns = ButtonDesigns.light
 ) {
+  const id = `btn-${Math.round(Math.random()*1000000000)}`;
+
   let href = link.fields.externalUrl;
   const url = link.fields.url;
   if (url) {
@@ -45,16 +47,19 @@ export default function Button(
       break;
   }
 
+  const borderFocus = (design === ButtonDesigns.light) ?
+    'border: 1px solid var( --sfr-color-grey-100 );' : ''
+
   return html`
     <style>
-      .sfr-button:focus {
+      .${id}:focus {
         outline: none;
         box-shadow: var( --sfr-effect-focus-shadow );
-        border: 1px solid var( --sfr-color-grey-100 );
+        ${borderFocus}
       }
     </style>
     <a
-      class="sfr-button"
+      class="${id}"
       ${style({
         ...designStyle,
         font: 'type-text-bold-70',
@@ -65,7 +70,8 @@ export default function Button(
         borderRadius: 'var( --sfr-spacing-1 )',
       })}
       href="${href}"
-      ${link.fields.target ? `target="${link.fields.target}"` : ''}>
+      ${link.fields.target ?
+        `target="${link.fields.target}"` : ''}>
       ${link.fields.title}
     </a>
   `;

@@ -118,22 +118,38 @@ export async function renderContactFormView(
       ${Checkbox(
         'Design Systems',
         'interest',
-        'designSystem'
+        'designSystem',
+        {}, {
+          maxWidth: '340px',
+          width: '100%',
+        }
       )}
       ${Checkbox(
         'Figma Widgets',
         'interest',
-        'figmaWidgets'
+        'figmaWidgets',
+        {}, {
+          maxWidth: '340px',
+          width: '100%',
+        }
       )}
       ${Checkbox(
         'Partnership and collaboration',
         'interest',
-        'partnership'
+        'partnership',
+        {}, {
+          maxWidth: '340px',
+          width: '100%',
+        }
       )}
       ${Checkbox(
         'Other',
         'interest',
         'other',
+        {}, {
+          maxWidth: '340px',
+          width: '100%',
+        }
       )}
 
       ${Textarea(

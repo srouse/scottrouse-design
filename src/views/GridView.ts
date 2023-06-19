@@ -45,14 +45,16 @@ export default class GridView extends BaseView {
           ${style({
             flexH: true,
             width: 'spacing-col-12'
+          },  {
+            alignItems: 'stretch',
           })}>
           ${(children).map((child: string, index: number) => {
             return html`
-              <div ${style({}, {
+              <!-- <div ${style({}, {
                   flex: '1'
-                })}>
+                })}> -->
                 ${child}
-              </div>
+              <!-- </div> -->
             `;
           }).join('')}
         </div>
