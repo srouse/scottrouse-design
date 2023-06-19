@@ -176,7 +176,7 @@ export default class FooterView extends BaseView {
                 </svg>
               </a>
               <a
-                href="emailto:${footer.fields.email}"
+                href="mailto: ${footer.fields.email}"
                 alt="Scott Rouse Email">
                 <svg width="26" height="26" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <g clip-path="url(#clip0_11_275)">
