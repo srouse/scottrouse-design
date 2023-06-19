@@ -5,7 +5,7 @@ import style from "@srouse/-scottrouse-design-system/transformations/fds-web/sty
 import { ContentTypeId } from "../types";
 import renderOutputHtml from "../utils/renderOutputHtml";
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
-import { BLOCKS } from "@contentful/rich-text-types";
+import { BLOCKS, INLINES, MARKS } from "@contentful/rich-text-types";
 import Header from "./components/Header";
 
 export default class FooterView extends BaseView {
@@ -15,8 +15,6 @@ export default class FooterView extends BaseView {
     controller: BaseController
   ): Promise<string> {
     const footer = entry as unknown as IFooter;
-
-    
 
     // LOCATED
     let located = '';
@@ -42,6 +40,9 @@ export default class FooterView extends BaseView {
         return Header(text, level);
       }
       const options = {
+        renderMark: {
+          // [MARKS.BOLD]
+        },
         renderNode: {
           [BLOCKS.PARAGRAPH]: (node, next) => {
             let text = next(node.content);
@@ -54,9 +55,14 @@ export default class FooterView extends BaseView {
           [BLOCKS.HEADING_4]: (node, next) => headerRender(node, next, 4),
           [BLOCKS.HEADING_5]: (node, next) => headerRender(node, next, 5),
           [BLOCKS.HEADING_6]: (node, next) => headerRender(node, next, 6),
+          [INLINES.HYPERLINK]: (node, next) => {
+            return `<a href="${node.data.uri}" ${style({color: 'color-grey-00'}, {})}>${next(node.content)}</a>`;
+          }
+      
         },
       };
       content = documentToHtmlString(footer.fields.content, options);
+      console.log(content)
     }
 
     // NAVIGATION
