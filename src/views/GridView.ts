@@ -47,6 +47,7 @@ export default class GridView extends BaseView {
             width: 'spacing-col-12'
           },  {
             alignItems: 'stretch',
+            justifyContent: 'center',
           })}>
           ${(children).map((child: string, index: number) => {
             return html`
