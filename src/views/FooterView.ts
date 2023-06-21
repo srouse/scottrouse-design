@@ -62,7 +62,6 @@ export default class FooterView extends BaseView {
         },
       };
       content = documentToHtmlString(footer.fields.content, options);
-      console.log(content)
     }
 
     // NAVIGATION
