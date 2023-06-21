@@ -135,7 +135,7 @@ export default class HeaderView extends BaseView {
             <a
               href="/"
               ${style({
-                color: 'color-grey-100',
+                color: 'color-grey-00',
               }, {
                 textDecoration: 'none' 
               })}>${header.fields.title}</a>
