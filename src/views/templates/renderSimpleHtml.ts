@@ -14,13 +14,13 @@ export default async function renderSimpleHtml(
     <link rel="stylesheet" href="https://scottrouse-design-system.netlify.app/transformations/fds-web/sfr.css?${cacheBreak}" />
   </head>
   <!-- Google tag (gtag.js) -->
-  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-GKPHMTEMSG"></script> -->
-  <!-- <script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TG3CZT9Y5S"></script>
+  <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-GKPHMTEMSG');
-  </script> -->
+    gtag('config', 'G-TG3CZT9Y5S');
+  </script>
   <style>
     html, body {
       margin: 0; padding: 0;
