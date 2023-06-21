@@ -132,7 +132,13 @@ export default class HeaderView extends BaseView {
             ${style({
               font: 'type-text-semibold-100'
             })}>
-            <a href="/">${header.fields.title}</a>
+            <a
+              href="/"
+              ${style({
+                color: 'color-grey-100',
+              }, {
+                textDecoration: 'none' 
+              })}>${header.fields.title}</a>
           </div>
           <div
             class="header-fill"
