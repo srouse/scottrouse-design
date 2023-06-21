@@ -3,7 +3,7 @@ import { BaseController, BaseView, html } from "scu-ssg";
 import { ILink, ISimpleView } from '../@types/generated/contentful';
 import style from "@srouse/-scottrouse-design-system/transformations/fds-web/style";
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
-import { BLOCKS } from "@contentful/rich-text-types";
+import { BLOCKS, INLINES } from "@contentful/rich-text-types";
 import renderOutputHtml from "../utils/renderOutputHtml";
 import Controller from "../Controller";
 import { SFRColorValue } from "@srouse/-scottrouse-design-system/transformations/fds-web/css-vars";
