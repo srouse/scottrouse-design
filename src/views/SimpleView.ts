@@ -82,6 +82,9 @@ export default class SimpleView extends BaseView {
             [BLOCKS.HEADING_4]: (node, next) => headerRender(node, next, 4),
             [BLOCKS.HEADING_5]: (node, next) => headerRender(node, next, 5),
             [BLOCKS.HEADING_6]: (node, next) => headerRender(node, next, 6),
+            [INLINES.HYPERLINK]: (node, next) => {
+              return `<a href="${node.data.uri}" ${style({color: 'color-grey-00'}, {})}>${next(node.content)}</a>`;
+            }
           },
         };
         contentHtml = documentToHtmlString(content.fields.content, options);
