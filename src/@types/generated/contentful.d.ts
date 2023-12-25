@@ -48,6 +48,36 @@ export interface IArticle extends Entry<IArticleFields> {
   };
 }
 
+export interface IButtonWcFields {
+  /** Label */
+  label: string;
+
+  /** URL */
+  url?: string | undefined;
+
+  /** Web Component */
+  webComponentConfig?: Record<string, any> | undefined;
+}
+
+/** Simple example of a Content Type connected to a web component */
+
+export interface IButtonWc extends Entry<IButtonWcFields> {
+  sys: {
+    id: string;
+    type: string;
+    createdAt: string;
+    updatedAt: string;
+    locale: string;
+    contentType: {
+      sys: {
+        id: "buttonWc";
+        linkType: "ContentType";
+        type: "Link";
+      };
+    };
+  };
+}
+
 export interface ICardViewFields {
   /** Entry Title */
   entryTitle: string;
@@ -556,6 +586,66 @@ export interface IProject extends Entry<IProjectFields> {
   };
 }
 
+export interface IPromotionalBannerFields {
+  /** Title */
+  title?: string | undefined;
+
+  /** Description */
+  description?: Document | undefined;
+
+  /** Image */
+  image?: Asset | undefined;
+
+  /** Web Component Config */
+  webComponentConfig?: Record<string, any> | undefined;
+}
+
+export interface IPromotionalBanner extends Entry<IPromotionalBannerFields> {
+  sys: {
+    id: string;
+    type: string;
+    createdAt: string;
+    updatedAt: string;
+    locale: string;
+    contentType: {
+      sys: {
+        id: "promotionalBanner";
+        linkType: "ContentType";
+        type: "Link";
+      };
+    };
+  };
+}
+
+export interface IPromotionalBannerWcFields {
+  /** Title */
+  title: string;
+
+  /** Description */
+  description?: Document | undefined;
+
+  /** Web Component Config */
+  webComponentConfig?: Record<string, any> | undefined;
+}
+
+export interface IPromotionalBannerWc
+  extends Entry<IPromotionalBannerWcFields> {
+  sys: {
+    id: string;
+    type: string;
+    createdAt: string;
+    updatedAt: string;
+    locale: string;
+    contentType: {
+      sys: {
+        id: "promotionalBannerWc";
+        linkType: "ContentType";
+        type: "Link";
+      };
+    };
+  };
+}
+
 export interface IReadmeContentFields {
   /** Title */
   title?: string | undefined;
@@ -834,6 +924,7 @@ export interface IWebsite extends Entry<IWebsiteFields> {
 
 export type CONTENT_TYPE =
   | "article"
+  | "buttonWc"
   | "cardView"
   | "content"
   | "footer"
@@ -848,6 +939,8 @@ export type CONTENT_TYPE =
   | "navigation"
   | "page"
   | "project"
+  | "promotionalBanner"
+  | "promotionalBannerWc"
   | "readmeContent"
   | "readmePage"
   | "readmeProject"
@@ -858,6 +951,7 @@ export type CONTENT_TYPE =
 
 export type IEntry =
   | IArticle
+  | IButtonWc
   | ICardView
   | IContent
   | IFooter
@@ -872,6 +966,8 @@ export type IEntry =
   | INavigation
   | IPage
   | IProject
+  | IPromotionalBanner
+  | IPromotionalBannerWc
   | IReadmeContent
   | IReadmePage
   | IReadmeProject
