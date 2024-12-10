@@ -1,4 +1,4 @@
-import { BaseContentfulAPIModel, BaseController, BaseModel } from 'scu-ssg';
+import { BaseController } from 'scu-ssg';
 import { ContentTypeId } from './types';
 import PageModel from './models/PageModel';
 import PageView from './views/PageView';

@@ -1,11 +1,10 @@
 import { Entry } from "contentful";
-import { BaseController, BaseView, html, renderEntry } from "scu-ssg";
-import { IFooter, IHeader, INavigation, IPage, IUrl } from '../@types/generated/contentful';
+import { BaseController, BaseView, html } from "scu-ssg";
+import { IFooter, INavigation } from '../@types/generated/contentful';
 import style from "@srouse/-scottrouse-design-system/transformations/fds-web/style";
-import { ContentTypeId } from "../types";
 import renderOutputHtml from "../utils/renderOutputHtml";
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
-import { BLOCKS, INLINES, MARKS } from "@contentful/rich-text-types";
+import { BLOCKS, INLINES } from "@contentful/rich-text-types";
 import Header from "./components/Header";
 
 export default class FooterView extends BaseView {
