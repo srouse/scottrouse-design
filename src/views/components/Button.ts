@@ -1,5 +1,5 @@
 import { html } from "scu-ssg";
-import { ILink } from "../../@types/generated/contentful";
+import { ILink, ILinkFields } from "../../@types/generated/contentful";
 import style from "@srouse/-scottrouse-design-system/transformations/fds-web/style";
 import { SFRProp } from "@srouse/-scottrouse-design-system/transformations/fds-web/css-atoms";
 
@@ -9,9 +9,15 @@ export enum ButtonDesigns {
   primaryDark = 'primaryDark'
 }
 
+export enum ButtonSize {
+  small = 'small',
+  default = 'default',
+}
+
 export default function Button(
-  link: ILink,
-  design: ButtonDesigns = ButtonDesigns.light
+  link: ILink | {fields: ILinkFields},
+  design: ButtonDesigns = ButtonDesigns.light,
+  size: ButtonSize = ButtonSize.default
 ) {
   const id = `btn-${Math.round(Math.random()*1000000000)}`;
 
@@ -47,6 +53,15 @@ export default function Button(
       break;
   }
 
+  switch (size) {
+    case ButtonSize.small:
+      designStyle['font'] = 'type-text-bold-40';
+      break;
+    case ButtonSize.default:
+      designStyle['font'] = 'type-text-bold-70';
+      break;
+  }
+
   const borderFocus = (design === ButtonDesigns.light) ?
     'border: 1px solid var( --sfr-color-grey-100 );' : ''
 
@@ -62,7 +77,6 @@ export default function Button(
       class="${id}"
       ${style({
         ...designStyle,
-        font: 'type-text-bold-70',
         paddingHeight: 'spacing-1',
         paddingWidth: 'spacing-1-6',
       }, {

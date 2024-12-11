@@ -518,11 +518,14 @@ export interface IPageFields {
   /** Title */
   title?: string | undefined;
 
+  /** Context */
+  context?: "default" | "portfolio" | undefined;
+
   /** Url */
   url?: IUrl | undefined;
 
   /** Sections */
-  sections?: ISection[] | undefined;
+  sections?: (ISection | IPortfolioSection)[] | undefined;
 }
 
 /** A root view of a website that presents other views and determines url. */
@@ -537,6 +540,65 @@ export interface IPage extends Entry<IPageFields> {
     contentType: {
       sys: {
         id: "page";
+        linkType: "ContentType";
+        type: "Link";
+      };
+    };
+  };
+}
+
+export interface IPortfolioEntryFields {
+  /** Title */
+  title?: string | undefined;
+
+  /** Summary */
+  summary?: string | undefined;
+
+  /** Links */
+  links?: ILink[] | undefined;
+
+  /** Asset Examples */
+  assetExamples?: Asset[] | undefined;
+}
+
+export interface IPortfolioEntry extends Entry<IPortfolioEntryFields> {
+  sys: {
+    id: string;
+    type: string;
+    createdAt: string;
+    updatedAt: string;
+    locale: string;
+    contentType: {
+      sys: {
+        id: "portfolioEntry";
+        linkType: "ContentType";
+        type: "Link";
+      };
+    };
+  };
+}
+
+export interface IPortfolioSectionFields {
+  /** Title */
+  title?: string | undefined;
+
+  /** Summary */
+  summary?: string | undefined;
+
+  /** Portfolio Entries */
+  portfolioEntries?: IPortfolioEntry[] | undefined;
+}
+
+export interface IPortfolioSection extends Entry<IPortfolioSectionFields> {
+  sys: {
+    id: string;
+    type: string;
+    createdAt: string;
+    updatedAt: string;
+    locale: string;
+    contentType: {
+      sys: {
+        id: "portfolioSection";
         linkType: "ContentType";
         type: "Link";
       };
@@ -639,130 +701,6 @@ export interface IPromotionalBannerWc
     contentType: {
       sys: {
         id: "promotionalBannerWc";
-        linkType: "ContentType";
-        type: "Link";
-      };
-    };
-  };
-}
-
-export interface IReadmeContentFields {
-  /** Title */
-  title?: string | undefined;
-
-  /** Header */
-  header?: string | undefined;
-
-  /** Content */
-  content?: string | undefined;
-
-  /** Files */
-  files?: Asset[] | undefined;
-
-  /** Images */
-  images?: IImage[] | undefined;
-}
-
-export interface IReadmeContent extends Entry<IReadmeContentFields> {
-  sys: {
-    id: string;
-    type: string;
-    createdAt: string;
-    updatedAt: string;
-    locale: string;
-    contentType: {
-      sys: {
-        id: "readmeContent";
-        linkType: "ContentType";
-        type: "Link";
-      };
-    };
-  };
-}
-
-export interface IReadmePageFields {
-  /** Title */
-  title?: string | undefined;
-
-  /** Name */
-  name?: string | undefined;
-
-  /** Content */
-  content?:
-    | (IImage | IReadmeContent | IReadmeProject | IReadmePage)[]
-    | undefined;
-}
-
-export interface IReadmePage extends Entry<IReadmePageFields> {
-  sys: {
-    id: string;
-    type: string;
-    createdAt: string;
-    updatedAt: string;
-    locale: string;
-    contentType: {
-      sys: {
-        id: "readmePage";
-        linkType: "ContentType";
-        type: "Link";
-      };
-    };
-  };
-}
-
-export interface IReadmeProjectFields {
-  /** Title */
-  title?: string | undefined;
-
-  /** Name */
-  name?: string | undefined;
-
-  /** Project Abbreviation */
-  projectAbbreviation?: string | undefined;
-
-  /** Table of Contents */
-  tableOfContents?: boolean | undefined;
-
-  /** Badges */
-  badges?: Record<string, any> | undefined;
-
-  /** Developer Emails */
-  developerEmails?: string | undefined;
-
-  /** NPM URL */
-  npmUrl?: string | undefined;
-
-  /** Repo URL */
-  repoUrl?: string | undefined;
-
-  /** Figma Widget URL */
-  figmaWidgetUrl?: string | undefined;
-
-  /** Production URL */
-  productionUrl?: string | undefined;
-
-  /** NonProduction URL */
-  nonProductionUrl?: string | undefined;
-
-  /** ## Description */
-  description?: string | undefined;
-
-  /** Content */
-  content?:
-    | (IImage | IReadmeContent | IReadmePage | IReadmeProject)[]
-    | undefined;
-}
-
-export interface IReadmeProject extends Entry<IReadmeProjectFields> {
-  sys: {
-    id: string;
-    type: string;
-    createdAt: string;
-    updatedAt: string;
-    locale: string;
-    contentType: {
-      sys: {
-        id: "readmeProject";
         linkType: "ContentType";
         type: "Link";
       };
@@ -938,12 +876,11 @@ export type CONTENT_TYPE =
   | "link"
   | "navigation"
   | "page"
+  | "portfolioEntry"
+  | "portfolioSection"
   | "project"
   | "promotionalBanner"
   | "promotionalBannerWc"
-  | "readmeContent"
-  | "readmePage"
-  | "readmeProject"
   | "section"
   | "simpleView"
   | "url"
@@ -965,12 +902,11 @@ export type IEntry =
   | ILink
   | INavigation
   | IPage
+  | IPortfolioEntry
+  | IPortfolioSection
   | IProject
   | IPromotionalBanner
   | IPromotionalBannerWc
-  | IReadmeContent
-  | IReadmePage
-  | IReadmeProject
   | ISection
   | ISimpleView
   | IUrl

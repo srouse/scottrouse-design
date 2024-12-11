@@ -1,8 +1,6 @@
 import { BaseController, html, renderEntry } from "scu-ssg";
-import style from "@srouse/-scottrouse-design-system/transformations/fds-web/style";
 import { IWebsite } from "../../@types/generated/contentful";
-import WebsiteModel, { getWebsite } from "../../models/WebsiteModel";
-import { javascript } from "./javascript";
+import { getWebsite } from "../../models/WebsiteModel";
 import renderSimpleHtml from "./renderSimpleHtml";
 
 export default async function renderHtml(

@@ -12,6 +12,8 @@ import JsonView from './views/JsonView';
 import ImageView from './views/ImageView';
 import CardView from './views/CardView';
 import FormView from './views/forms/FormView';
+import PortfolioSectionView from './views/PortfolioSectionView';
+import PortfolioEntryView from './views/PortfolioEntry';
 
 export default class Controller extends BaseController {
 
@@ -63,6 +65,14 @@ export default class Controller extends BaseController {
     ],
     [ContentTypeId.formView]: [
       new FormView(),
+      new JsonView()
+    ],
+    [ContentTypeId.portfolioSection]: [
+      new PortfolioSectionView(),
+      new JsonView()
+    ],
+    [ContentTypeId.portfolioEntry]: [
+      new PortfolioEntryView(),
       new JsonView()
     ]
   };

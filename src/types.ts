@@ -12,4 +12,6 @@ export enum ContentTypeId {
   imageView = 'imageView',
   simpleView = 'simpleView',
   cardView = 'cardView',
+  portfolioSection = 'portfolioSection',
+  portfolioEntry = 'portfolioEntry',
 }
