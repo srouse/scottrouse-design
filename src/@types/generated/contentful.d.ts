@@ -551,8 +551,11 @@ export interface IPortfolioEntryFields {
   /** Title */
   title?: string | undefined;
 
-  /** Summary */
-  summary?: string | undefined;
+  /** Description */
+  description?: Document | undefined;
+
+  /** Rainbow Colored */
+  rainbowColored?: boolean | undefined;
 
   /** Links */
   links?: ILink[] | undefined;
@@ -582,8 +585,8 @@ export interface IPortfolioSectionFields {
   /** Title */
   title?: string | undefined;
 
-  /** Summary */
-  summary?: string | undefined;
+  /** Description */
+  description?: Document | undefined;
 
   /** Portfolio Entries */
   portfolioEntries?: IPortfolioEntry[] | undefined;

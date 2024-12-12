@@ -17,7 +17,8 @@ export enum ButtonSize {
 export default function Button(
   link: ILink | {fields: ILinkFields},
   design: ButtonDesigns = ButtonDesigns.light,
-  size: ButtonSize = ButtonSize.default
+  size: ButtonSize = ButtonSize.default,
+  rainbow: boolean = false
 ) {
   const id = `btn-${Math.round(Math.random()*1000000000)}`;
 
@@ -72,6 +73,11 @@ export default function Button(
         box-shadow: var( --sfr-effect-focus-shadow );
         ${borderFocus}
       }
+      .${id} .rainbow-text {
+            background: linear-gradient(to right, #FF6347, #FFA500, #FFD700, #00FF00, #1E90FF, #8A2BE2, #FF69B4);
+            -webkit-background-clip: text;
+            color: transparent;
+      }
     </style>
     <a
       class="${id}"
@@ -86,7 +92,7 @@ export default function Button(
       href="${href}"
       ${link.fields.target ?
         `target="${link.fields.target}"` : ''}>
-      ${link.fields.title}
+      <span class="${rainbow ? 'rainbow-text' : ''}">${link.fields.title}</span>
     </a>
   `;
 }

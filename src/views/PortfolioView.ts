@@ -49,9 +49,9 @@ export default async function PortfolioView(
             alignmentBaselineLeft: true,
             color: 'color-grey-00',
           }, {
-            maxWidth: 'var( --page-max-width )',
+            maxWidth: '800px',
             margin: '0 var( --section-margin )',
-            width: '100%'
+            width: '100%',
           })}>
 
             <div
@@ -81,9 +81,7 @@ export default async function PortfolioView(
 
             <div
                 class="page-content"
-                ${style({
-                    marginRight: 'spacing-col-1',
-                }, {
+                ${style({}, {
                     flex: '1',
                     flexDirection: 'column',
                     gap: 'var( --sfr-spacing-3 )',

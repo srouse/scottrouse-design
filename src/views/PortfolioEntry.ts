@@ -1,9 +1,10 @@
 import { Entry } from "contentful";
 import { BaseController, BaseView, html } from "scu-ssg";
-import { IPortfolioEntry, IPortfolioSection } from '../@types/generated/contentful';
+import { IPortfolioEntry } from '../@types/generated/contentful';
 import renderOutputHtml from "../utils/renderOutputHtml";
 import style from "@srouse/-scottrouse-design-system/transformations/fds-web/style";
 import Button, { ButtonDesigns, ButtonSize } from "./components/Button";
+import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 
 export default class PortfolioEntryView extends BaseView {
 
@@ -13,11 +14,19 @@ export default class PortfolioEntryView extends BaseView {
   ): Promise<string> {
     const portfolioEntry = entry as unknown as IPortfolioEntry;
 
-
     return renderOutputHtml(html`
       <style>
-        [data-entry-id="${portfolioEntry.sys.id}"] .section-body > * {
+        [data-entry-id="${portfolioEntry.sys.id}"] {
           margin-bottom: var( --sfr-spacing-2 );
+        }
+        [data-entry-id="${portfolioEntry.sys.id}"] p {
+          margin: 0px;
+        }
+        [data-entry-id="${portfolioEntry.sys.id}"] .description a {
+          color: var( --sfr-color-grey-00 );
+        }]
+        [data-entry-id="${portfolioEntry.sys.id}"] p:not(:last-child) {
+          margin-bottom:  var( --sfr-spacing-1 );
         }
       </style>
       <div
@@ -29,19 +38,20 @@ export default class PortfolioEntryView extends BaseView {
             flexV: true,
             marginTop: 'spacing-2',
           }, {
-            gap: 'var( --sfr-spacing-0-9 )'
+            // gap: 'var( --sfr-spacing-0-6 )'
           })}>
           <div
             ${style({
-              font: 'type-text-semibold-40'
+              font: 'type-text-semibold-60'
             })}>
             ${portfolioEntry.fields.title}
           </div>
-          <div
+          <div class="description"
             ${style({
-              font: 'type-text-30'
+              font: 'type-text-30',
+              marginBottom: 'spacing-1'
             })}>
-            ${portfolioEntry.fields.summary || ''}
+            ${portfolioEntry.fields.description ? documentToHtmlString(portfolioEntry.fields.description) : ''}
           </div>
           <div
           ${style({
@@ -50,7 +60,7 @@ export default class PortfolioEntryView extends BaseView {
             gap: 'var( --sfr-spacing-1 )'
           })}>
           ${portfolioEntry.fields.links?.map(link => 
-            Button(link, ButtonDesigns.dark, ButtonSize.small)
+            Button(link, ButtonDesigns.dark, ButtonSize.small, portfolioEntry.fields.rainbowColored)
           ).join('') || ''}
           ${portfolioEntry.fields.assetExamples?.map(asset => 
             Button({
@@ -60,7 +70,7 @@ export default class PortfolioEntryView extends BaseView {
                 externalUrl: `https:${asset.fields.file.url}`,
                 target: asset.fields.title
               }
-            }, ButtonDesigns.dark, ButtonSize.small)
+            }, ButtonDesigns.dark, ButtonSize.small, portfolioEntry.fields.rainbowColored)
           ).join('') || ''}
         </div>
         </div>
@@ -71,10 +81,3 @@ export default class PortfolioEntryView extends BaseView {
   }
 
 }
-
- //asset.fields.file.url
-// ${
-//   portfolioEntry.fields.assetExamples?.map(asset => 
-//     Button(asset.fields., ButtonDesigns.dark, ButtonSize.small)
-//   ).join('')
-// }

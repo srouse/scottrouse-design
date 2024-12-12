@@ -4,6 +4,7 @@ import { IPortfolioSection } from '../@types/generated/contentful';
 import renderOutputHtml from "../utils/renderOutputHtml";
 import style from "@srouse/-scottrouse-design-system/transformations/fds-web/style";
 import renderLayouts from "../utils/renderLayouts";
+import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 
 export default class PortfolioSectionView extends BaseView {
 
@@ -16,8 +17,14 @@ export default class PortfolioSectionView extends BaseView {
 
     return renderOutputHtml(html`
       <style>
-        [data-entry-id="${portfolioSection.sys.id}"] .section-body > * {
+        [data-entry-id="${portfolioSection.sys.id}"] {
           margin-bottom: var( --sfr-spacing-2 );
+        }
+        [data-entry-id="${portfolioSection.sys.id}"] p {
+          margin: 0px;
+        }
+        [data-entry-id="${portfolioSection.sys.id}"] p:not(:last-child) {
+          margin-bottom:  var( --sfr-spacing-1 );
         }
       </style>
       <div
@@ -27,24 +34,27 @@ export default class PortfolioSectionView extends BaseView {
         <div
           ${style({
             flexV: true,
-            marginTop: 'spacing-3',
+            marginTop: 'spacing-1',
+            marginBottom: 'spacing-2'
           }, {
-            gap: 'var( --sfr-spacing-0-6 )'
+            // gap: 'var( --sfr-spacing-0-6 )'
           })}>
           <div
             ${style({
-              font: 'type-text-semibold-70'
+              font: 'type-text-semibold-90'
             })}>
             ${portfolioSection.fields.title}
           </div>
-          <div
-            ${style({
-              font: 'type-text-50'
-            })}>
-            ${portfolioSection.fields.summary || ''}
-          </div>
-          ${portfolioEntries.join('')}
+          ${portfolioSection.fields.description ? html`
+              <div
+                ${style({
+                  font: 'type-text-30'
+                })}>
+                ${portfolioSection.fields.description ? documentToHtmlString(portfolioSection.fields.description) : ''}
+              </div>
+            ` : ''}
         </div>
+        ${portfolioEntries.join('')}
       </div>`,
       portfolioSection,
       controller
