@@ -14,8 +14,11 @@ export default class ImageView extends BaseView {
     const image = imageView.fields.image;
     let url = '';
     let alt: string | undefined = '';
-    let imgStyle = imageView.fields.maxWidth ? 
-      `style="max-width: ${imageView.fields.maxWidth}px;"` : '';
+    let imgStyle = `${
+        imageView.fields.maxWidth ? `max-width: ${imageView.fields.maxWidth}px;` : ''}
+      ${
+        imageView.fields.widthType === 'fill' ? 'width: 100%;' : ''
+      }`;
     if (image && image?.fields.asset) {
       const asset = controller.state.getAsset(image.fields.asset.sys.id);
       url = imageUrl(asset, controller, imageView.fields.maxWidth);
@@ -25,11 +28,12 @@ export default class ImageView extends BaseView {
     const output = html`
       <div
         data-entry-type-id="${imageView.sys.contentType.sys.id}"
-        data-entry-id="${imageView.sys.id}"
+        data-entry-id="${imageView.sys.id}sss"
         ${style({
           center: true,
         })}>
-        <img src="${url}" alt="${alt}" ${imgStyle} />
+        <img src="${url}" alt="${alt}" style="${imgStyle}" />
+        <!-- ${imgStyle} -->
       </div>`;
 
     return renderOutputHtml( output, imageView, controller );

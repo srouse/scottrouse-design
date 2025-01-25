@@ -2,12 +2,14 @@ import { html } from "scu-ssg";
 import style from "@srouse/-scottrouse-design-system/transformations/fds-web/style";
 import { SFRProp } from "@srouse/-scottrouse-design-system/transformations/fds-web/css-atoms";
 import type * as CSS from 'csstype';
+import { transformSimpleMarkdown } from "../../utils/textTransformations";
 
 export default function Header(
   heading: string,
   level: 1 | 2 | 3 | 4 | 5 | 6,
   externalSFRStyles: SFRProp = {},
   externalStyles: CSS.Properties = {},
+  boldSFRStyles: SFRProp = {}
 ) {
   const h = `h${level}`;
 
@@ -55,7 +57,7 @@ export default function Header(
       }, {
         ...externalStyles
       })}>
-      ${heading}
+      ${transformSimpleMarkdown(heading, boldSFRStyles)}
     </${h}>
   `;
 }

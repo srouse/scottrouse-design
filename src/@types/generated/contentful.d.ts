@@ -155,6 +155,37 @@ export interface IContent extends Entry<IContentFields> {
   };
 }
 
+export interface IEmployerFields {
+  /** Title */
+  title: string;
+
+  /** Logo Horizontal */
+  logoHorizontal?: Asset | undefined;
+
+  /** Short Description */
+  shortDescription?: string | undefined;
+
+  /** Job Titles */
+  jobTitles?: string | undefined;
+}
+
+export interface IEmployer extends Entry<IEmployerFields> {
+  sys: {
+    id: string;
+    type: string;
+    createdAt: string;
+    updatedAt: string;
+    locale: string;
+    contentType: {
+      sys: {
+        id: "employer";
+        linkType: "ContentType";
+        type: "Link";
+      };
+    };
+  };
+}
+
 export interface IFooterFields {
   /** Entry Title */
   entryTitle: string;
@@ -419,6 +450,9 @@ export interface IImageViewFields {
 
   /** Max Width */
   maxWidth?: number | undefined;
+
+  /** Width Type */
+  widthType?: "fit" | "fill" | undefined;
 
   /** Image */
   image?: IImage | undefined;
@@ -718,6 +752,9 @@ export interface ISectionFields {
   /** Title */
   title?: string | undefined;
 
+  /** Design Style */
+  designStyle: "Version-2025" | "Version-2023";
+
   /** Anchor */
   anchor?: string | undefined;
 
@@ -868,6 +905,7 @@ export type CONTENT_TYPE =
   | "buttonWc"
   | "cardView"
   | "content"
+  | "employer"
   | "footer"
   | "formView"
   | "gridView"
@@ -894,6 +932,7 @@ export type IEntry =
   | IButtonWc
   | ICardView
   | IContent
+  | IEmployer
   | IFooter
   | IFormView
   | IGridView

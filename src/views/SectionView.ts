@@ -2,11 +2,25 @@ import { Entry } from "contentful";
 import { BaseController, BaseView, html } from "scu-ssg";
 import { ISection } from '../@types/generated/contentful';
 import style from "@srouse/-scottrouse-design-system/transformations/fds-web/style";
-import { SFRColorValue } from "@srouse/-scottrouse-design-system/transformations/fds-web/css-vars";
+import { SFRColorValue, SFRSpacingValue, SFRTypeValue } from "@srouse/-scottrouse-design-system/transformations/fds-web/css-vars";
 import renderLayouts from "../utils/renderLayouts";
 import renderOutputHtml from "../utils/renderOutputHtml";
 import Controller from "../Controller";
 import Header from "./components/Header";
+
+type StyleConfig = {
+  headerType: SFRTypeValue;
+  headerColor: SFRColorValue;
+  headerBoldColor: SFRColorValue;
+  headerAlign: string, // TextAlign typing?
+  maxPageWidth: string,
+  maxHeaderWidth: string,
+  backgroundColor: SFRColorValue;
+  innerBackgroundColor: SFRColorValue;
+  innerCornerRadius: SFRSpacingValue;
+  innerPadding: SFRSpacingValue;
+  inverse: boolean;
+};
 
 export default class SectionView extends BaseView {
 
@@ -16,43 +30,66 @@ export default class SectionView extends BaseView {
   ): Promise<string> {
     const section = entry as unknown as ISection;
 
-    let backgroundColor: SFRColorValue = 'color-grey-100';
-    let inverse: boolean = false;
+    const styleConfig: StyleConfig = {
+      headerType: 'type-text-bold-60',
+      headerColor: 'color-grey-00',
+      headerBoldColor: 'color-grey-00',
+      headerAlign: section.fields.alignment === 'center' ? 'center' :
+      section.fields.alignment === 'left' ? 'left' : 'right',
+      maxPageWidth: 'var( --page-max-width )',
+      maxHeaderWidth: 'var( --page-max-width )',
+      backgroundColor: 'color-grey-100',
+      innerBackgroundColor: 'color-grey-100',
+      innerCornerRadius: 'spacing-0',
+      innerPadding: 'spacing-0',
+      inverse: false,
+    };
+    
+    if (section.fields.maxWidth) {
+      styleConfig.maxPageWidth = `${section.fields.maxWidth}px`;
+      styleConfig.maxHeaderWidth = `${section.fields.maxWidth}px`;
+    }
+
     const bgColor = section.fields.backgroundColor;
-    if (bgColor !== 'default') {
-      switch (bgColor) {
-        case 'primary':
-          backgroundColor = 'color-primary';
-          inverse = true;
-          break;
-        case 'primary-light':
-          backgroundColor = 'color-primary-90';
-          break;
-        case 'secondary':
-          backgroundColor = 'color-secondary';
-          inverse = true;
-          break;
-        case 'secondary-light':
-          backgroundColor = 'color-secondary-90';
-          break;
-      }
+    
+    if (section.fields.designStyle === 'Version-2023') {
+        if (bgColor !== 'default') {
+            switch (bgColor) {
+                case 'primary':
+                  styleConfig.backgroundColor = 'color-primary';
+                  styleConfig.inverse = true;
+                    break;
+                case 'primary-light':
+                  styleConfig.backgroundColor = 'color-primary-90';
+                    break;
+                case 'secondary':
+                  styleConfig.backgroundColor = 'color-secondary';
+                  styleConfig.inverse = true;
+                    break;
+                case 'secondary-light':
+                  styleConfig.backgroundColor = 'color-secondary-90';
+                    break;
+            }
+        }
+        if (styleConfig.inverse === true) {
+          styleConfig.headerColor = 'color-grey-100';
+        }
+    } else {
+      styleConfig.headerType = 'type-text-bold-110';
+      styleConfig.headerColor = 'color-grey-60';
+      styleConfig.headerBoldColor = 'color-grey-20';
+      styleConfig.innerBackgroundColor = 'color-grey-98';
+      styleConfig.innerCornerRadius = 'spacing-1';
+      styleConfig.innerPadding = 'spacing-4';
+      styleConfig.headerAlign = 'center';
+      // styleConfig.maxHeaderWidth = `calc( ${styleConfig.maxPageWidth} - 300px )`;
     }
 
     const localController = (controller as Controller);
     const origInverse = localController.renderState.inverse;
-    localController.renderState.inverse = inverse;
+    localController.renderState.inverse = styleConfig.inverse;
     const children = await renderLayouts(controller, section.fields.views);
     localController.renderState.inverse = origInverse;
-
-    let textColor: SFRColorValue = 'color-grey-00';
-    if (inverse === true) {
-      textColor = 'color-grey-100'
-    }
-
-    let maxWidth = 'var( --page-max-width )';
-    if (section.fields.maxWidth) {
-      maxWidth = `${section.fields.maxWidth}px`;
-    }
 
     return renderOutputHtml(html`
       <style>
@@ -68,7 +105,7 @@ export default class SectionView extends BaseView {
           stack: true,
           width: 'spacing-col-12',
           paddingHeight: 'spacing-8',
-          backgroundColor
+          backgroundColor: styleConfig.backgroundColor
         }, {
           paddingLeft: 'var( --section-margin )',
           paddingRight: 'var( --section-margin )',
@@ -76,25 +113,38 @@ export default class SectionView extends BaseView {
         <div
           class="section-body"
           ${style({
-            stack: true,
+            stack: true
           }, {
-            maxWidth,
-            margin: '0 auto',
+            maxWidth: styleConfig.maxPageWidth,
+            margin: '0 auto'
           })}>
           ${section.fields.title ? html`
             ${Header(
               section.fields.title, 2,
               {
-                color: textColor,
-                font: 'type-text-bold-60',
+                color: styleConfig.headerColor,
+                font: styleConfig.headerType,
               },
               {
-                textAlign: section.fields.alignment === 'center' ? 'center' :
-                  section.fields.alignment === 'left' ? 'left' : 'right'
+                textAlign: styleConfig.headerAlign as any,
+                lineHeight: '1.1',
+                maxWidth: styleConfig.maxHeaderWidth,
+                marginLeft: 'auto',
+                marginRight: 'auto'
+              },
+              {
+                color: styleConfig.headerBoldColor
               }
             )}
           `: ''}
-          ${children.join('')}
+          <div
+            ${style({
+              backgroundColor: styleConfig.innerBackgroundColor,
+              borderRadius: styleConfig.innerCornerRadius,
+              padding: styleConfig.innerPadding
+            })}>
+            ${children.join('')}
+          </div>
         </div>
       </div>`,
       section,

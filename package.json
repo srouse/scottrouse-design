@@ -11,18 +11,21 @@
     "build:readme": "yarn copy && ctfl-readme build",
     "build:types": "scu-ssg types --output ./src/@types/generated/contentful.d.ts",
     "build:ssg": "scu-ssg build",
+    "build:compile": "scu-ssg esbuild && yarn copy && yarn build:ssg",
+    "watch": "nodemon --watch ./src --watch ./www --ext js,ts,html --exec 'yarn build:compile'",
     "copy": "node ./scripts/copy.mjs",
     "server": "http-server ./dist"
   },
   "dependencies": {
     "@contentful/rich-text-html-renderer": "^16.1.0",
     "@contentful/rich-text-types": "^16.2.0",
-    "@srouse/-scottrouse-design-system": "v0.0.10",
+    "@srouse/-scottrouse-design-system": "v0.0.14",
     "scu-ssg": "0.1.18"
   },
   "devDependencies": {
-    "contentful-readme-generator": "0.0.23",
+    "contentful-readme-generator": "0.0.25",
     "http-server": "^14.1.1",
+    "nodemon": "^3.1.9",
     "recursive-copy": "^2.0.14"
   }
 }

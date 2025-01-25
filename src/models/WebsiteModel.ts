@@ -1,18 +1,20 @@
 import { BaseContentfulAPIModel, BaseController } from "scu-ssg";
 import { ContentTypeId } from "../types";
 import { IWebsite } from "../@types/generated/contentful";
-
-
-export const websiteId = '7CKULoxRapxruVVhstelFa';
+import { CONTENTFUL_WEBSITE_TAG, SCOTT_ROUSE_DEV_TAG, SCOTT_ROUSE_DEV_WEBSITE, SCOTT_ROUSE_OG_WEBSITE } from "../constants";
 
 export default class WebsiteModel extends BaseContentfulAPIModel {
   contentTypeId = ContentTypeId.website;
 
   requiredEntities = [
-    websiteId,
+    SCOTT_ROUSE_OG_WEBSITE,
+    SCOTT_ROUSE_DEV_WEBSITE
   ];
 }
 
 export function getWebsite(controller: BaseController): IWebsite {
-  return controller.state.getEntry(websiteId) as unknown as IWebsite;
+  if (CONTENTFUL_WEBSITE_TAG === SCOTT_ROUSE_DEV_TAG) {
+    return controller.state.getEntry(SCOTT_ROUSE_DEV_WEBSITE) as unknown as IWebsite; 
+  }
+  return controller.state.getEntry(SCOTT_ROUSE_OG_WEBSITE) as unknown as IWebsite;
 }

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading Page</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+        .loading-text, .input-container, .error-container {
+            font-size: 18px;
+            color: #555;
+            text-align: center;
+        }
+        .input-container input {
+            padding: 8px;
+            font-size: 16px;
+            margin-top: 10px;
+            width: 300px;
+        }
+        .input-container button {
+            padding: 8px 16px;
+            font-size: 16px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        .error-container {
+            color: #d9534f;
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-text">Loading...</div>
+
+    <script type="module">
+        import Controller from '../_system/Controller.js';
+
+        (async () => {
+            // Utility function to show errors on the page
+            function showError(errorMessage) {
+                document.body.innerHTML = `
+                    <div class="error-container">
+                        <h1>Error</h1>
+                        <p>${errorMessage}</p>
+                    </div>
+                `;
+            }
+
+            // Check for access token in local storage
+            let accessToken = localStorage.getItem('contentful_access_token');
+
+            // Function to prompt the user for a token
+            function promptForToken() {
+                document.body.innerHTML = `
+                    <div class="input-container">
+                        <p>Please enter your access token:</p>
+                        <input id="accessTokenInput" type="text" placeholder="Enter token here" />
+                        <button id="submitTokenButton">Submit</button>
+                    </div>
+                `;
+
+                const input = document.getElementById('accessTokenInput');
+                const button = document.getElementById('submitTokenButton');
+
+                button.addEventListener('click', () => {
+                    const token = input.value.trim();
+                    if (token) {
+                        localStorage.setItem('contentful_access_token', token);
+                        location.reload();
+                    } else {
+                        alert('Please enter a valid token.');
+                    }
+                });
+            }
+
+            // If no access token found, prompt for one
+            if (!accessToken) {
+                promptForToken();
+                return;
+            }
+
+            // Continue rendering the page with the token
+            const params = new URLSearchParams(window.location.search);
+
+            const config = {
+                CONTENTFUL_SPACE: 'rtkhko6y3s3u',
+                CONTENTFUL_ENVIRONMENT: 'scottrouse-design-2024-12-11',
+                CONTENTFUL_ACCESS_TOKEN: accessToken,
+                CONTENTFUL_PREVIEW_ACCESS_TOKEN: accessToken,
+                CONTENTFUL_CONTENT_STATUS: 'preview',
+                WEBSITE_URL: '',
+                WEBCOMPS_URL: '',
+            };
+            const controller = new Controller(config);
+
+            let slugInfo;
+            try {
+                const route = params.get('route');
+                slugInfo = await controller.runSlug(
+                    route,
+                    'preview'
+                );
+            } catch (err) {
+                console.error('Error fetching slug:', err);
+                showError(`An error occurred while fetching the page content. ${err}`);
+                return;
+            }
+
+            let htmlContent = 'Page not found';
+            if (slugInfo) {
+                htmlContent = Array.isArray(slugInfo) ? slugInfo[0].content : slugInfo.content;
+            } else {
+                showError('No page found for the given route.');
+                return;
+            }
+
+            // Replace the entire document with the new HTML
+            document.open();
+            document.write(htmlContent);
+            document.close();
+        })();
+    </script>
+</body>
+</html>
