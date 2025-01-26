@@ -13,6 +13,6 @@ if (typeof process !== 'undefined') {
     globalThis.CONTENTFUL_WEBSITE_TAG = process.env.CONTENTFUL_WEBSITE_TAG;
 }
 
-// Preview needs these vars...
+// Preview needs these vars... 
 export const PREVIEW_CONTENTFUL_SPACE = process.env.PUBLIC_CONTENTFUL_SPACE;
 export const PREVIEW_CONTENTFUL_ENVIRONMENT = process.env.PUBLIC_CONTENTFUL_ENVIRONMENT;
