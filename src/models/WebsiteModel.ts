@@ -2,6 +2,9 @@ import { BaseContentfulAPIModel, BaseController } from "scu-ssg";
 import { ContentTypeId } from "../types";
 import { IWebsite } from "../@types/generated/contentful";
 import {
+  CONTENTFUL_WEBSITE_TAG,
+  SCOTT_ROUSE_DESIGN_SYSTEM_TAG,
+  SCOTT_ROUSE_DESIGN_TAG,
   SCOTT_ROUSE_DESIGN_WEBSITE,
   SCOTT_ROUSE_DEV_TAG,
   SCOTT_ROUSE_DEV_WEBSITE,
@@ -21,13 +24,14 @@ export default class WebsiteModel extends BaseContentfulAPIModel {
 }
 
 export function getWebsite(controller: BaseController): IWebsite {
-  if (process.env.PUBLIC_CONTENTFUL_WEBSITE_TAG === SCOTT_ROUSE_DEV_TAG) {
+  console.log('CONTENTFUL_WEBSITE_TAG', CONTENTFUL_WEBSITE_TAG);
+  if (CONTENTFUL_WEBSITE_TAG === SCOTT_ROUSE_DEV_TAG) {
     return controller.state.getEntry(SCOTT_ROUSE_DEV_WEBSITE) as unknown as IWebsite; 
   }
-  if (process.env.PUBLIC_CONTENTFUL_WEBSITE_TAG === SCOTT_ROUSE_DESIGN_WEBSITE) {
+  if (CONTENTFUL_WEBSITE_TAG === SCOTT_ROUSE_DESIGN_TAG) {
     return controller.state.getEntry(SCOTT_ROUSE_DESIGN_WEBSITE) as unknown as IWebsite; 
   }
-  if (process.env.PUBLIC_CONTENTFUL_WEBSITE_TAG === SCOTT_ROUSE_SYSTEM_WEBSITE) {
+  if (CONTENTFUL_WEBSITE_TAG === SCOTT_ROUSE_DESIGN_SYSTEM_TAG) {
     return controller.state.getEntry(SCOTT_ROUSE_SYSTEM_WEBSITE) as unknown as IWebsite; 
   }
   return controller.state.getEntry(SCOTT_ROUSE_OG_WEBSITE) as unknown as IWebsite;
