@@ -5,7 +5,6 @@ import PageView from './views/PageView';
 import HeaderView from './views/HeaderView';
 import WebsiteModel from './models/WebsiteModel';
 import FooterView from './views/FooterView';
-import SectionView from './views/SectionView';
 import GridView from './views/GridView';
 import SimpleView from './views/SimpleView';
 import JsonView from './views/JsonView';
@@ -16,6 +15,7 @@ import PortfolioSectionView from './views/PortfolioSectionView';
 import PortfolioEntryView from './views/PortfolioEntry';
 import { Entry } from 'contentful';
 import { CONTENTFUL_WEBSITE_TAG } from './constants';
+import SectionView from './viewControllers/SectionView/SectionView';
 
 export default class Controller extends BaseController {
 

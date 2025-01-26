@@ -24,7 +24,6 @@ export default class WebsiteModel extends BaseContentfulAPIModel {
 }
 
 export function getWebsite(controller: BaseController): IWebsite {
-  console.log('CONTENTFUL_WEBSITE_TAG', CONTENTFUL_WEBSITE_TAG);
   if (CONTENTFUL_WEBSITE_TAG === SCOTT_ROUSE_DEV_TAG) {
     return controller.state.getEntry(SCOTT_ROUSE_DEV_WEBSITE) as unknown as IWebsite; 
   }

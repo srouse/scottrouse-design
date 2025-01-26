@@ -1,12 +1,16 @@
 import { Entry } from "contentful";
 import { BaseController, BaseView, html } from "scu-ssg";
-import { ISection } from '../@types/generated/contentful';
+import { ISection } from '../../@types/generated/contentful';
 import style from "@srouse/-scottrouse-design-system/transformations/fds-web/style";
-import { SFRColorValue, SFRSpacingValue, SFRTypeValue } from "@srouse/-scottrouse-design-system/transformations/fds-web/css-vars";
-import renderLayouts from "../utils/renderLayouts";
-import renderOutputHtml from "../utils/renderOutputHtml";
-import Controller from "../Controller";
-import Header from "./components/Header";
+import {
+  SFRColorValue,
+  SFRSpacingValue,
+  SFRTypeValue
+} from "@srouse/-scottrouse-design-system/transformations/fds-web/css-vars";
+import renderOutputHtml from "../../utils/renderOutputHtml";
+import Controller from "../../Controller";
+import Header from "../../views/components/Header";
+import renderSectionChildren from "./renderSectionChildren";
 
 type StyleConfig = {
   headerType: SFRTypeValue;
@@ -81,39 +85,37 @@ export default class SectionView extends BaseView {
       styleConfig.innerBackgroundColor = 'color-grey-98';
       styleConfig.innerCornerRadius = 'spacing-1';
       styleConfig.innerPadding = 'spacing-4';
-      styleConfig.headerAlign = 'center';
+      // styleConfig.headerAlign = 'center';
       // styleConfig.maxHeaderWidth = `calc( ${styleConfig.maxPageWidth} - 300px )`;
     }
 
     const localController = (controller as Controller);
     const origInverse = localController.renderState.inverse;
     localController.renderState.inverse = styleConfig.inverse;
-    const children = await renderLayouts(controller, section.fields.views);
     localController.renderState.inverse = origInverse;
 
+    // Opinionated Rendering...
+    const children = await renderSectionChildren(entry, controller);
+
     return renderOutputHtml(html`
-      <style>
-        [data-entry-id="${section.sys.id}"] .section-body > * {
-          margin-bottom: var( --sfr-spacing-2 );
-        }
-      </style>
       <div
         data-entry-type-id="${section.sys.contentType.sys.id}"
         data-entry-id="${section.sys.id}"
         id="${section.fields.anchor}"
         ${style({
-          stack: true,
-          width: 'spacing-col-12',
-          paddingHeight: 'spacing-8',
-          backgroundColor: styleConfig.backgroundColor
+            stack: true,
+            width: 'spacing-col-12',
+            paddingHeight: 'spacing-8',
+            backgroundColor: styleConfig.backgroundColor,
         }, {
-          paddingLeft: 'var( --section-margin )',
-          paddingRight: 'var( --section-margin )',
+            paddingLeft: 'var( --section-margin )',
+            paddingRight: 'var( --section-margin )',
         })}>
         <div
           class="section-body"
           ${style({
-            stack: true
+            flexV: true,
+            // alignmentRight: true // doesn't work here, forget why
           }, {
             maxWidth: styleConfig.maxPageWidth,
             margin: '0 auto'
@@ -124,13 +126,14 @@ export default class SectionView extends BaseView {
               {
                 color: styleConfig.headerColor,
                 font: styleConfig.headerType,
+                marginBottom: 'spacing-4'
               },
               {
                 textAlign: styleConfig.headerAlign as any,
                 lineHeight: '1.1',
                 maxWidth: styleConfig.maxHeaderWidth,
                 marginLeft: 'auto',
-                marginRight: 'auto'
+                marginRight: 'auto',
               },
               {
                 color: styleConfig.headerBoldColor
@@ -141,7 +144,9 @@ export default class SectionView extends BaseView {
             ${style({
               backgroundColor: styleConfig.innerBackgroundColor,
               borderRadius: styleConfig.innerCornerRadius,
-              padding: styleConfig.innerPadding
+              padding: styleConfig.innerPadding,
+            }, {
+              alignSelf: 'stretch'
             })}>
             ${children.join('')}
           </div>
@@ -151,5 +156,7 @@ export default class SectionView extends BaseView {
       controller
     );
   }
+
+  
 
 }

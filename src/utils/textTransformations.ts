@@ -16,9 +16,11 @@ import style from "@srouse/-scottrouse-design-system/transformations/fds-web/sty
  * @returns {string} The transformed string with HTML tags.
  */
 export function transformSimpleMarkdown(
-    input: string,
+    input: string | undefined,
     boldSFRStyles?: SFRProp
 ): string {
+    if (!input) return '';
+
     // Regular expression to match bold markers (** or __)
     const boldRegex = /(\*\*|__)(.+?)\1/g;
 

@@ -165,6 +165,9 @@ export interface IEmployerFields {
   /** Short Description */
   shortDescription?: string | undefined;
 
+  /** Size Stat */
+  sizeStat?: string | undefined;
+
   /** Job Titles */
   jobTitles?: string | undefined;
 }
@@ -585,6 +588,12 @@ export interface IPortfolioEntryFields {
   /** Title */
   title?: string | undefined;
 
+  /** Year */
+  year?: string | undefined;
+
+  /** Main Image */
+  mainImage?: Asset | undefined;
+
   /** Description */
   description?: Document | undefined;
 
@@ -775,7 +784,16 @@ export interface ISectionFields {
 
   /** Views */
   views?:
-    | (ISimpleView | IGridView | IImageView | IFormView | ICardView)[]
+    | (
+        | ISimpleView
+        | IGridView
+        | IImageView
+        | IFormView
+        | ICardView
+        | IEmployer
+        | IProject
+        | IPortfolioEntry
+      )[]
     | undefined;
 }
 

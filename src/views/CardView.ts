@@ -8,7 +8,6 @@ import renderOutputHtml from "../utils/renderOutputHtml";
 import Controller from "../Controller";
 import { SFRColorValue } from "@srouse/-scottrouse-design-system/transformations/fds-web/css-vars";
 import Button from "./components/Button";
-import Header from "./components/Header";
 
 export default class CardView extends BaseView {
 

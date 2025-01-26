@@ -11,8 +11,8 @@
     "build:readme": "yarn copy && ctfl-readme build",
     "build:types": "scu-ssg types --output ./src/@types/generated/contentful.d.ts",
     "build:ssg": "scu-ssg build && yarn publicEnvVars",
-    "build:compile": "scu-ssg esbuild && yarn copy && yarn build:ssg",
-    "watch": "nodemon --watch ./src --watch ./www --ext js,ts,html --exec 'yarn build:compile'",
+    "build:compile": "scu-ssg esbuild && yarn copy && yarn publicEnvVars",
+    "watch": "nodemon --watch .env --watch ./src --watch ./www --ext js,ts,html --exec 'yarn build:compile'",
     "copy": "node ./scripts/copy.mjs",
     "publicEnvVars": "node ./scripts/processPublicEnvVars.mjs",
     "server": "http-server ./dist"
