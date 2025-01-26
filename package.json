@@ -10,16 +10,18 @@
     "build": "yarn build:types && yarn build:ssg && yarn build:readme",
     "build:readme": "yarn copy && ctfl-readme build",
     "build:types": "scu-ssg types --output ./src/@types/generated/contentful.d.ts",
-    "build:ssg": "scu-ssg build",
+    "build:ssg": "scu-ssg build && yarn publicEnvVars",
     "build:compile": "scu-ssg esbuild && yarn copy && yarn build:ssg",
     "watch": "nodemon --watch ./src --watch ./www --ext js,ts,html --exec 'yarn build:compile'",
     "copy": "node ./scripts/copy.mjs",
+    "publicEnvVars": "node ./scripts/processPublicEnvVars.mjs",
     "server": "http-server ./dist"
   },
   "dependencies": {
     "@contentful/rich-text-html-renderer": "^16.1.0",
     "@contentful/rich-text-types": "^16.2.0",
     "@srouse/-scottrouse-design-system": "v0.0.14",
+    "dotenv": "^16.4.7",
     "scu-ssg": "0.1.18"
   },
   "devDependencies": {

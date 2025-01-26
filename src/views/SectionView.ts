@@ -16,7 +16,7 @@ type StyleConfig = {
   maxPageWidth: string,
   maxHeaderWidth: string,
   backgroundColor: SFRColorValue;
-  innerBackgroundColor: SFRColorValue;
+  innerBackgroundColor: SFRColorValue | undefined;
   innerCornerRadius: SFRSpacingValue;
   innerPadding: SFRSpacingValue;
   inverse: boolean;
@@ -35,11 +35,11 @@ export default class SectionView extends BaseView {
       headerColor: 'color-grey-00',
       headerBoldColor: 'color-grey-00',
       headerAlign: section.fields.alignment === 'center' ? 'center' :
-      section.fields.alignment === 'left' ? 'left' : 'right',
+        section.fields.alignment === 'left' ? 'left' : 'right',
       maxPageWidth: 'var( --page-max-width )',
       maxHeaderWidth: 'var( --page-max-width )',
       backgroundColor: 'color-grey-100',
-      innerBackgroundColor: 'color-grey-100',
+      innerBackgroundColor: undefined,
       innerCornerRadius: 'spacing-0',
       innerPadding: 'spacing-0',
       inverse: false,

@@ -15,7 +15,6 @@ import FormView from './views/forms/FormView';
 import PortfolioSectionView from './views/PortfolioSectionView';
 import PortfolioEntryView from './views/PortfolioEntry';
 import { Entry } from 'contentful';
-import { CONTENTFUL_WEBSITE_TAG } from './constants';
 
 export default class Controller extends BaseController {
 
@@ -34,13 +33,16 @@ export default class Controller extends BaseController {
 
   findEntrySlug(entry: Entry<unknown> | null | undefined): string | undefined {
     // we are enabling multiple websites this way...
+    
     let slug = super.findEntrySlug(entry);
-    if (slug !== undefined && CONTENTFUL_WEBSITE_TAG) { // applied to just intentional routes
-      const hasTag = entry?.metadata.tags.find(tag => tag.sys.id === CONTENTFUL_WEBSITE_TAG);
+    const prevSlug = slug;
+    if (slug !== undefined && process.env.PUBLIC_CONTENTFUL_WEBSITE_TAG) { // applied to just intentional routes
+      const hasTag = entry?.metadata.tags.find(tag => tag.sys.id === process.env.PUBLIC_CONTENTFUL_WEBSITE_TAG);
       if (!hasTag) {
         slug = undefined; // just ignore slug...
       }
     }
+    if (prevSlug !== undefined)
     return slug;
   }
 

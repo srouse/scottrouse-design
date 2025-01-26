@@ -33,7 +33,6 @@ export default class ImageView extends BaseView {
           center: true,
         })}>
         <img src="${url}" alt="${alt}" style="${imgStyle}" />
-        <!-- ${imgStyle} -->
       </div>`;
 
     return renderOutputHtml( output, imageView, controller );

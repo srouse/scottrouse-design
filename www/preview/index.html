@@ -41,6 +41,10 @@
 
     <script type="module">
         import Controller from '../_system/Controller.js';
+        import {
+            PREVIEW_CONTENTFUL_SPACE,
+            PREVIEW_CONTENTFUL_ENVIRONMENT
+        } from '../_system/constants.js';
 
         (async () => {
             // Utility function to show errors on the page
@@ -90,8 +94,8 @@
             const params = new URLSearchParams(window.location.search);
 
             const config = {
-                CONTENTFUL_SPACE: 'rtkhko6y3s3u',
-                CONTENTFUL_ENVIRONMENT: 'scottrouse-design-2024-12-11',
+                CONTENTFUL_SPACE: PREVIEW_CONTENTFUL_SPACE,
+                CONTENTFUL_ENVIRONMENT: PREVIEW_CONTENTFUL_ENVIRONMENT,
                 CONTENTFUL_ACCESS_TOKEN: accessToken,
                 CONTENTFUL_PREVIEW_ACCESS_TOKEN: accessToken,
                 CONTENTFUL_CONTENT_STATUS: 'preview',
