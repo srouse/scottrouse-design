@@ -78,7 +78,7 @@ export default async function renderSectionChildren(
         <div ${style({
             marginTop: 'spacing-2',
             marginBottom: 'spacing-4'
-          })}>
+          })}> 
             ${Grid(
                 undefined,
                 portfolioHTML,
